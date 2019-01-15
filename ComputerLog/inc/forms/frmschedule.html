@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<style>
+	.multiselect {
+	  width: 200px;
+	}
+	
+	.selectBox {
+	  position: relative;
+	}
+	
+	.selectBox select {
+	  width: 100%;
+	  font-weight: bold;
+	}
+	
+	.overSelect {
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	}
+	
+	#checkboxes {
+	  display: none;
+	  border: 1px #dadada solid;
+	}
+	
+	#checkboxes label {
+	  display: block;
+	}
+	
+	#checkboxes label:hover {
+	  background-color: #1e90ff;
+	}
+</style>
+
+</head>
+
+	
+
+
+<div  style="margin-top:-1250px" id="" ng-controller="LogScheduleController" class="container">
+
+ <div  class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header"><b>Schedule</b></div>
+      <div class="card-body">
+			<form data-toggle="validator" role="form" ng-submit="saveLogSchedule()" >
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+				
+				  			<ul class="nav nav-tabs">
+							    <li><a ng-click="logScheduleTab('History')" data-toggle="tab" href="">Schedule</a></li>
+							    
+							</ul>	 
+				
+				    <div id="disclaimer_body" class="panel-body">
+			
+				 	<br>
+					
+							
+							
+					<!---------------- Schedule Screen ---------------------------->
+							
+									 
+						<div  ng-show="ShowSchedule" class="container">
+							  <h3 id="intpk_schedule_id" name="">Schedule</h3>
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSchedule">Schedule For <font color="red">*</font></label>
+							                 <select id="" ng-model="logschedulefor" ng-change="logScheduleItemTypeselected(logschedulefor)"  style="width: 435px;" required  class="form-control">
+							                 		<option value=""  selected>select schedule for</option>
+											 	    <option ng-repeat="logScheduleGetItemTable in logScheduleGetItemTables" value={{logScheduleGetItemTable['intpk_item_type_id']}}>{{logScheduleGetItemTable['str_item_type_name']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>	
+						          
+						       	  <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logScheduleItem">Item <font color="red">*</font></label>
+							                 <select id="" ng-model="logScheduleItem"  style="width: 435px;" required class="form-control">
+							                 		<option value=""  selected>select Item</option>
+											 	    <option ng-if="SelectedScheduleItemTable==6" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_component_id']}}>{{ScheduleAllItem['str_component_name']}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==7" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_hardware_id']}}>{{ScheduleAllItem['str_hardware_desc']+' ('+ScheduleAllItem['str_system_id']+')'}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==8" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_hardware_component_id']}}>{{ScheduleAllItem['str_hardware_desc']+' -'+ScheduleAllItem['str_system_id']+' ('+ScheduleAllItem['str_component_name']+')'}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==14" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_hardware_software_id']}}>{{ScheduleAllItem['str_hardware_desc']+' -'+ScheduleAllItem['str_system_id']+' ('+ScheduleAllItem['str_software_desc']+')'}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==5" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_hardware_type_id']}}>{{ScheduleAllItem['str_hardware_desc']}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==15" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_history_type']}}>{{ScheduleAllItem['str_history_desc']}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==9" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_ip_address_id']}}>{{ScheduleAllItem['str_hardware_desc']+' -'+ScheduleAllItem['str_system_id']+' ('+ScheduleAllItem['str_ip_desc']+')'}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==2" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_map_drive_id']}}>{{ScheduleAllItem['str_link_desc']}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==12" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_software_id']}}>{{ScheduleAllItem['str_software_name']}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==13" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_software_record_id']}}>{{ScheduleAllItem['str_software_name']+'('+ScheduleAllItem['str_software_desc']+')'}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==1" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_user_id']}}>{{ScheduleAllItem['str_firstname']+' '+ScheduleAllItem['str_lastname']}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==11" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_user_hardware_id']}}>{{ScheduleAllItem['str_hardware_desc']+'-'+ScheduleAllItem['str_system_id']+'('+ScheduleAllItem['str_firstname']+' '+ScheduleAllItem['str_lastname']+')'}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==3" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_user_map_drive_id']}}>{{ScheduleAllItem['str_firstname']+' '+ScheduleAllItem['str_lastname']+'-'+ScheduleAllItem['str_link_desc']+' -('+ScheduleAllItem['str_letter_desc']+')'}}</option>
+											 	    <option ng-if="SelectedScheduleItemTable==4" ng-repeat="ScheduleAllItem in ScheduleAllItems" value={{ScheduleAllItem['intpk_vpn_id']}}>{{ScheduleAllItem['str_firstname']+' '+ScheduleAllItem['str_lastname']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>  
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">History Type <font color="red">*</font></label>
+							                 <select id="" ng-model="logScheduleHistoryType"   style="width: 435px;"  class="form-control">
+							                 		<option value=""  selected>select History type</option>
+											 	    <option ng-repeat="logScheduleProblemType in logScheduleProblemTypes" value={{logScheduleProblemType['intpk_history_type']}}>{{logScheduleProblemType['str_history_desc']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>   
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">User <font color="red">*</font></label>
+							                 <select id="" ng-model="logScheduleUser"   style="width: 435px;"  class="form-control">
+							                 		<option value=""  selected>select User</option>
+											 	    <option ng-repeat="LogScheduleAllUser in LogScheduleAllUsers" value={{LogScheduleAllUser['intpk_user_id']}}>{{LogScheduleAllUser['str_firstname']+' '+LogScheduleAllUser['str_lastname']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>  
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						            
+						             <div class="col-md-6">
+						                <label  for="logSoftwareName">Schedule Type </label>
+							                 <select id="" ng-model="logscheduleType" ng-change="logScheduleType(logscheduleType)"  style="width: 210px;" required  class="form-control">
+							                 		<option value=""  selected>select schedule type</option>
+											 	    <option value="1">Day</option>
+											 	    <option value="2">Week</option>
+											 	    <option value="3">Month</option>
+											 </select> 
+						              </div>
+						              <div class="col-md-6">
+						                <label  for="LogScheduleDay">Pick Day </label>
+							              <select id="" ng-model="logscheduleday"   style="width: 210px;" required  class="form-control">
+							                 		<option value=""  selected>select schedule day</option>
+											 	    <option ng-if="int_schedule_type==1" ng-repeat="SchedulePickDay in SchedulePickDays" value={{SchedulePickDay['int_value']}}>{{SchedulePickDay['str_desc']}}</option>
+											 	    <option ng-if="int_schedule_type==2" ng-repeat="SchedulePickDay in SchedulePickDays" value={{SchedulePickDay['int_week_value']}}>{{SchedulePickDay['str_week_desc']}}</option>
+											 	    <option ng-if="int_schedule_type==3" ng-repeat="SchedulePickDay in SchedulePickDays" value={{SchedulePickDay['int_month_value']}}>{{SchedulePickDay['str_month_desc']}}</option>
+											 </select> 
+						              </div>
+						             
+						            </div>
+						          </div>
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logScheduleDesc">Schedule Desc </label>
+							               <textarea ng-model="LogScheduleDesc" name="Text1" cols="59" rows="4"></textarea> 
+						              </div>
+						            </div>
+						          </div>
+						          
+						          
+						          
+						    
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_schedule" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogScheduleSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+
+						              </div>
+						            </div>
+						          </div>
+						          
+						          
+							  
+							</div>
+				
+							
+						
+	 
+							 
+			
+				 	</div>
+				 
+				 </div>
+				</div>
+			
+			</form>
+	</div>
+	</div>
+	</div>
+	
+	
+	
+
+	<div class="modal fade" id="LogScheduleSearch" tabindex="-1" role="dialog" aria-labelledby="LogScheduleSearch" aria-hidden="true">
+		     <div class="modal-dialog modal-lg"  >
+		        <div class="modal-content">
+		       <div class="modal-header">
+		           <div class="form-group">
+		            <div class="form-row">
+		              <div class="col-6">
+		            	<h5 class="modal-title" id="LogScheduleSearch">Schedule Search</h5> 
+		              </div>
+		              
+		              <div class="col-3">
+		                  <select id="" ng-model="logschedulesearchfor"   style="width: 235px;" required  class="form-control">
+		                 		<option value=""  selected>select schedule for</option>
+						 	    <option ng-repeat="logScheduleGetItemTable in logScheduleGetItemTables" value={{logScheduleGetItemTable['intpk_item_type_id']}}>{{logScheduleGetItemTable['str_item_type_name']}}</option>
+						 </select> 
+		              </div>
+		               <div  class="col-3">
+		              	 <button style="margin-left: 125px" id="log_schedule_search_btn" ng-click="logScheduleDialogsearch()"  class="btn btn-primary btn-block " > Search</button>
+		              </div>
+		            </div>
+		          </div>
+	       		 </div>
+		        
+		        
+		        <div class="container">
+		                        
+                     <div class="wrapper" >
+                         
+                         <div class="panel-body table-responsive">
+                          
+                         <table    class="table table-bordered">
+                             <thead>
+                                 <tr>
+                                     <th>Schedule For</th> 
+                                     <th>History Type</th> 
+                                     <th>User</th>
+                                     <th>Schedule Type</th>
+                                     <th>Pick Day</th>
+                                     <th>Schedule Desc</th>
+                                 </tr>
+                             </thead>
+                             <tbody id="LogProblemSearchTable"  name="1" >
+                                     <tr ng-repeat="logScheduleSearchItme in logScheduleSearchItmes">
+                                   
+											 	    <td ng-if="searchScheduleId==6" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#"> {{logScheduleSearchItme['str_component_name']}}</a></td>
+											 	    <td ng-if="searchScheduleId==7" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_hardware_desc']+' ('+logScheduleSearchItme['str_system_id']+')'}}</a></td>
+											 	    <td ng-if="searchScheduleId==8" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_hardware_desc']+' -'+logScheduleSearchItme['str_system_id']+' ('+logScheduleSearchItme['str_component_name']+')'}}</a></td>
+											 	    <td ng-if="searchScheduleId==14" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_hardware_desc']+' -'+logScheduleSearchItme['str_system_id']+' ('+logScheduleSearchItme['str_software_desc']+')'}}</a></td>
+											 	    <td ng-if="searchScheduleId==5" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_hardware_desc']}}</a></td>
+											 	    <td ng-if="searchScheduleId==15" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_history_desc']}}</a></td>
+											 	    <td ng-if="searchScheduleId==9" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_hardware_desc']+' -'+logScheduleSearchItme['str_system_id']+' ('+logScheduleSearchItme['str_ip_desc']+')'}}</a></td>
+											 	    <td ng-if="searchScheduleId==2" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_link_desc']}}</a></td>
+											 	    <td ng-if="searchScheduleId==12" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_software_name']}}</a></td>
+											 	    <td ng-if="searchScheduleId==13" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_software_name']+'('+logScheduleSearchItme['str_software_desc']+')'}}</a></td>
+											 	    <td ng-if="searchScheduleId==1" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_firstname']+' '+logScheduleSearchItme['str_lastname']}}</a></td>
+											 	    <td ng-if="searchScheduleId==11" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_hardware_desc']+'-'+logScheduleSearchItme['str_system_id']+'('+logScheduleSearchItme['str_firstname']+' '+logScheduleSearchItme['str_lastname']+')'}}</a></td>
+											 	    <td ng-if="searchScheduleId==3" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_firstname']+' '+logScheduleSearchItme['str_lastname']+'-'+logScheduleSearchItme['str_link_desc']+' -('+logScheduleSearchItme['str_letter_desc']+')'}}</a></td>
+											 	    <td ng-if="searchScheduleId==4" id={{logScheduleSearchItme['intpk_schedule_id']}}><a ng-click="logScheduleSelectedItem(logScheduleSearchItme['intpk_schedule_id'])" href="#">{{logScheduleSearchItme['str_firstname']+' '+logScheduleSearchItme['str_lastname']}}</a></td>
+											 	    
+											 	    <td id={{logScheduleSearchItme['str_history_desc']}}>{{logScheduleSearchItme['sched_his_type']}}</td>
+											 	    <td id="">{{logScheduleSearchItme['schd_first_name']+' '+logScheduleSearchItme['schd_last_name']}}</td>
+											 	    <td ng-if="logScheduleSearchItme['int_day']!=null">Day</td>
+											 	    <td ng-if="logScheduleSearchItme['int_week']!=null">Week</td>
+											 	    <td ng-if="logScheduleSearchItme['int_month']!=null">Month</td>
+											 	    <td ng-if="logScheduleSearchItme['int_day']!=null">Daily</td>
+											 	    <td ng-if="logScheduleSearchItme['int_week']!=null && logScheduleSearchItme['int_week']==1">Monday</td>
+											 	    <td ng-if="logScheduleSearchItme['int_week']!=null && logScheduleSearchItme['int_week']==2">Tuesday</td>
+											 	    <td ng-if="logScheduleSearchItme['int_week']!=null && logScheduleSearchItme['int_week']==3">Wednesday</td>
+											 	    <td ng-if="logScheduleSearchItme['int_week']!=null && logScheduleSearchItme['int_week']==4">Thursday</td>
+											 	    <td ng-if="logScheduleSearchItme['int_week']!=null && logScheduleSearchItme['int_week']==5">Friday</td>
+											 	    <td ng-if="logScheduleSearchItme['int_week']!=null && logScheduleSearchItme['int_week']==6">saturday</td>
+											 	    <td ng-if="logScheduleSearchItme['int_week']!=null && logScheduleSearchItme['int_week']==7">Sunday</td>
+											 	    <td ng-if="logScheduleSearchItme['int_month']!=null">{{logScheduleSearchItme['int_month']}}</td>
+											 	    <td>{{logScheduleSearchItme['str_schedule_desc']}}</td>
+											 	   
+											 	    
+                                 </tr>
+                            
+                             
+                             </tbody>
+                         </table>
+                         </div>
+                     </div>
+		        </div>
+		        
+		        
+		        
+		          <div class="modal-footer">
+		            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+		           
+		          </div>
+		        </div>
+		      </div>
+	    </div>
+	
+	
+	
+	
+	
+	        
+	        
+	   
+	    
+	   
+	    
+	   
+	    
+	    
+	    
+	      
+	
+	</div>
+
+
+
+
+</html>

@@ -1,0 +1,14 @@
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-19 15:21:32</em></strong><br />
+	<strong style="width: 75px;">Query:</strong>   select Top 10 * from [ComputerLog].[dbo].[tbl_problem_history] AS PH 
+  				INNER JOIN [ComputerLog].[dbo].[tbl_all_item] AS AI ON AI.intpk_all_item_id=PH.intfk_all_item_id
+  				INNER JOIN [ComputerLog].[dbo].[tbl_item_type] AS IT ON IT.intpk_item_type_id=AI.intfk_item_id
+  				INNER JOIN [ComputerLog].[dbo].[tbl_history_type] AS HT ON HT.intpk_history_type=PH.intfk_history_type_id
+  				LEFT OUTER JOIN [ComputerLog].[dbo].[tbl_user] AS U ON U.intpk_user_id=PH.int_fixed_user_id
+  				where bln_pblm=1
+ 				 order by dte_problem_occured desc <br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLoginValidate.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+

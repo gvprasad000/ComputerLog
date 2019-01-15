@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<style>
+	.multiselect {
+	  width: 200px;
+	}
+	
+	.selectBox {
+	  position: relative;
+	}
+	
+	.selectBox select {
+	  width: 100%;
+	  font-weight: bold;
+	}
+	
+	.overSelect {
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	}
+	
+	#checkboxes {
+	  display: none;
+	  border: 1px #dadada solid;
+	}
+	
+	#checkboxes label {
+	  display: block;
+	}
+	
+	#checkboxes label:hover {
+	  background-color: #1e90ff;
+	}
+</style>
+
+</head>
+
+	
+
+
+<div  style="margin-top:-1250px" id="" ng-controller="LogSoftwareController" class="container">
+
+ <div  class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header"><b>Software</b></div>
+      <div class="card-body">
+			<form data-toggle="validator" role="form" ng-submit="saveLogSoftware()" >
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+				
+				  			<ul class="nav nav-tabs">
+							    <li><a ng-click="logHardwareTab('software')" data-toggle="tab" href="">Software</a></li>
+							    <li><a ng-click="logHardwareTab('MapHwSw');getAllHardware();logGetAllSoftwareRecord();" style="margin-left: 15px"  data-toggle="tab" href="">Map Hardware/Software</a></li>
+							    
+							    
+							</ul>	 
+				
+				    <div id="disclaimer_body" class="panel-body">
+			
+				 	<br>
+						<!-------------------- Software -------------------------------->
+							 
+						<div  ng-show="ShowSoftware" class="container">
+							  <h3 id="log_software_id" name="">Software</h3>
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  ng-model="intpk_software_id" for="logSoftwareName">Software Name <font color="red">*</font></label>
+						                <input style="width: 435px" class="form-control" ng-model="log_software_name" id="log_software_name" type="text" aria-describedby="nameHelp" placeholder="Enter Software Name">
+						              </div>
+						                <div class="col-md-2">
+						                 	 <button ng-click="logfindSoftware()" style="margin-left: 250px;margin-top: 35px" id="log_hardware_Ip" data-toggle="modal" type="button" data-target="#LogSoftwareFind" class="btn btn-primary btn-block" > <i class="fa fa-search" aria-hidden="true"></i></button>
+								   	  </div>
+						          </div>
+						          </div>	
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label id="log_software_record_id" ng-model="intpk_software_record_id"  for="logSoftwareDesc">Software Desc </label>
+						                <input style="width: 435px" class="form-control" ng-model="log_software_desc" id="log_software_desc" type="text" aria-describedby="nameHelp" placeholder="Enter Software desc">
+						              </div>
+						            
+						          </div>
+						          </div>	
+						          
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwarelicence">Software licence </label>
+						                <input style="width: 435px" class="form-control" ng-model="log_software_licence" id="log_software_licence" type="text" aria-describedby="nameHelp" placeholder="Enter Software licence">
+						              </div>
+						              
+						          </div>
+						          </div>	         
+						    
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_software" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogSoftwareSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+
+						              </div>
+						            </div>
+						          </div>
+							  
+							</div>
+							
+							
+							<!---------------- Map Hardware / Software  ---------------------------->
+							
+							<div  ng-show="ShowHwSw" class="container">
+							  <h3 id="log_map_hw_sw_id" name="">Map Hw/Sw</h3>
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  ng-model="intpk_map_hw_sw_hardware_id" for="logmapHwSwHardware">Hardware Name <font color="red">*</font></label>
+						                <select id="log_map_hw_sw_hw" ng-model="log_map_hw_sw_hw" ng-change="logMapHwSwHardware()"  style="width: 375px;"  class="form-control">
+										 	   <option value=""  selected>select Hardware</option>
+										 	   <option id={{'MapHwSwHardware_'+AllHardware['intpk_hardware_id']}} name="" ng-repeat="AllHardware in logAllHardwares"   value={{AllHardware['intpk_hardware_id']}}>{{AllHardware['str_hardware_desc']+' ('+AllHardware['str_system_id']+')'}} </option>									   												 
+									    </select>    
+						               
+						              </div>
+						               
+						          </div>
+						          </div>	
+						          
+							    <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label id="log_map_hw_sw_software"  for="log_map_hw_sw_software">Software </label>
+						     			   <select id="log_map_hw_sw_software" ng-model="log_map_hw_sw_software" multiple style="width: 375px;"   class="form-control">
+												 	 <option id={{'log_map_hw_sw_software_'+LogGetAllSoftwareRecord['intpk_software_record_id']}} name="" ng-repeat="LogGetAllSoftwareRecord in LogGetAllSoftwareRecords"   value={{LogGetAllSoftwareRecord['intpk_software_record_id']}}>{{LogGetAllSoftwareRecord['str_software_desc']}} </option>									   												 
+												</select>
+				
+									   </div>
+								       <div class="col-md-2">
+						                 	 <button ng-click="logMapHwSwSoftwareAdd()" style="margin-left: 200px;margin-top: 35px;width: 75px" id="log_hardware_components_add" data-toggle="modal" type="button" data-target="#LogMapHwSwSoftwareAdd" class="btn btn-primary btn-block" > <i class="fa fa-plus-circle" aria-hidden="true"></i> Add</button>
+								   		</div>
+	
+						          </div>
+					           </div>
+					           
+					           	<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_software_mapping" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogMapHwSwSoftware" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+
+						              </div>
+						            </div>
+						        </div>
+					                 
+					          
+							</div>		 
+			
+				 	</div>
+				 
+				 </div>
+				</div>
+			
+			</form>
+	</div>
+	</div>
+	</div>
+	
+	
+	<div class="modal fade" id="LogSoftwareFind" tabindex="-1" role="dialog" aria-labelledby="LogHardwareIp" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-10">
+	            	<h5 class="modal-title" id="LogHardwareAddIp">Softwars</h5> 
+	              </div>
+	              
+	              </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table    class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Softwares</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="HardwareIpTable"  name="1" >
+	                                        <tr ng-repeat="logAllSoftware in logAllSoftwares">
+	                                        <td id=logAllSoftware['intpk_software_id']}}><a ng-click="logAllSoftwareSelect(logAllSoftware['intpk_software_id'],logAllSoftware['str_software_name'])" href="#">{{logAllSoftware['str_software_name']}}</a></td>
+											
+	                                    </tr>
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	
+	
+		<div class="modal fade" id="LogMapHwSwSoftware" tabindex="-1" role="dialog" aria-labelledby="LogHardwareIp" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-6">
+	            	<h5 class="modal-title" id="">Map Hw/Sw</h5> 
+	              </div>
+	              
+	              <div class="col-3">
+	                <input style="width: 225px" class="form-control" ng-model="log_hw_sw_software_search_dialogue" id="log_hw_sw_software_search_dialogue" type="text" placeholder="Enter hardware system Id">
+	              </div>
+	               <div  class="col-3">
+	              	 <button style="margin-left: 125px" id="log_search_dialogue" ng-click="logMapHwSwSoftwareSearch()"  class="btn btn-primary btn-block " > Search</button>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table    class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Hardware System-Id</th>
+	                                        <th>Software</th>
+	                                        <th>Licence</th>
+	                                        <th>Delete</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="HardwareIpTable"  name="1" >
+	                                        <tr ng-repeat="logHwSwSoftwareMappedOne in logHwSwSoftwareMappedOnes">
+	                                        <td id=logHwSwSoftwareMappedOne['intpk_hardware_software_id']}}><a ng-click="logMapHwSwSoftwareSearchSelect(logHwSwSoftwareMappedOne['intfk_hardware_id'],logHwSwSoftwareMappedOne['intpk_hardware_software_id'])" href="#">{{logHwSwSoftwareMappedOne['str_hardware_desc']+' ('+logHwSwSoftwareMappedOne['str_system_id']+')'}}</a></td>
+											<td>{{logHwSwSoftwareMappedOne['str_software_desc']}}</td>
+											<td>{{logHwSwSoftwareMappedOne['licence_no']}}</td>
+											<td><button id={{'delete_map_hw_sw_software_selected_item_'+logHwSwSoftwareMappedOne['intpk_hardware_software_id']}} ng-click="logHwSwSoftwareRecordDelete(logHwSwSoftwareMappedOne['intpk_hardware_software_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button></td>
+	                                    </tr>
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	
+		
+	    <div class="modal fade" id="LogSoftwareSearch" tabindex="-1" role="dialog" aria-labelledby="LogSoftwareSearch" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-6">
+	            	<h5 class="modal-title" id="LogSoftwareSearch">Software Search</h5> 
+	              </div>
+	              
+	              <div class="col-3">
+	                <input style="width: 225px" class="form-control" ng-model="log_software_search" id="log_user_domain" type="text" placeholder="software Name">
+	              </div>
+	               <div  class="col-3">
+	              	 <button style="margin-left: 125px" id="log_software_search_btn" ng-click="logSoftwareDialogsearch()"  class="btn btn-primary btn-block " > Search</button>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Software Name</th>
+	                                        <th>Software Description</th>
+	                                        <th>Software Licence</th>
+	                                        <th>Delete</th>
+	                                        
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr ng-repeat="logSoftwareDialogselectedItem in logSoftwareDialogselectedItems">
+	                                        <td id={{logSoftwareDialogselectedItem['intpk_software_id']}}><a ng-click="getLogDialogSelectedSoftware(logSoftwareDialogselectedItem['intpk_software_id'],logSoftwareDialogselectedItem['intpk_software_record_id'],logSoftwareDialogselectedItem['str_software_name'],logSoftwareDialogselectedItem['str_software_desc'],logSoftwareDialogselectedItem['str_licence_no'])" href="#">{{logSoftwareDialogselectedItem['str_software_name']}}</a></td>
+											<td>{{logSoftwareDialogselectedItem['str_software_desc']}}</td>
+											<td>{{logSoftwareDialogselectedItem['str_licence_no']}}</td>
+											<td><button id={{'delete_software_type_id_'+logSoftwareDialogselectedItem['intpk_software_record_id']}} ng-click="logSoftwareRecordDelete(logSoftwareDialogselectedItem['intpk_software_record_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button></td>
+	                                    </tr>
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	   
+	    
+	    <div class="modal fade" id="LogMapHwSwSoftwareAdd" tabindex="-1" role="dialog" aria-labelledby="LogMapHwSwSoftwareAdd" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	              <div class="col-12">
+	            	<h5 class="modal-title" id="LogHardwareCompAddSearch">Software Add Licence</h5> 
+	              </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Software</th>
+	                                        <th>Licence</th>
+	                                        
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="AppendSwTableComponent">
+	                                   
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	    
+	    
+	      
+	
+	</div>
+
+
+
+
+</html>

@@ -1,0 +1,83 @@
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-05 13:17:07</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect *,U.str_firstname As str_fixed_user_f_name,U.str_lastname As str_fixed_user_l_name from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		LEFT OUTER JOIN [ComputerLog].[dbo].[tbl_user] AS U ON U.intpk_user_id=PH.int_fixed_user_id
+		INNER JOIN [ComputerLog].[dbo].[tbl_history_type] AS HIT ON  HIT.intpk_history_type=PH.intfk_history_type_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=AI.intfk_item_type_id  
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where AI.intfk_item_id=7 AND 
+		(dte_problem_occured>=CONVERT(DATETIME, ' 00:00', 102) AND dte_problem_occured<=CONVERT(DATETIME, '12/5/2018 23:59', 102))  AND PH.int_fixed_user_id=62<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-05 13:20:00</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect *,U.str_firstname As str_fixed_user_f_name,U.str_lastname As str_fixed_user_l_name from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		LEFT OUTER JOIN [ComputerLog].[dbo].[tbl_user] AS U ON U.intpk_user_id=PH.int_fixed_user_id
+		INNER JOIN [ComputerLog].[dbo].[tbl_history_type] AS HIT ON  HIT.intpk_history_type=PH.intfk_history_type_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_component] AS HC ON HC.intpk_hardware_component_id=AI.intfk_item_type_id  
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=HC.infk_component_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HC.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where AI.intfk_item_id=8 AND 
+		(dte_problem_occured>=CONVERT(DATETIME, ' 00:00', 102) AND dte_problem_occured<=CONVERT(DATETIME, '12/5/2018 23:59', 102)) <br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-05 13:23:12</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect *,U.str_firstname As str_fixed_user_f_name,U.str_lastname As str_fixed_user_l_name from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		LEFT OUTER JOIN [ComputerLog].[dbo].[tbl_user] AS U ON U.intpk_user_id=PH.int_fixed_user_id
+		INNER JOIN [ComputerLog].[dbo].[tbl_history_type] AS HIT ON  HIT.intpk_history_type=PH.intfk_history_type_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_component] AS HC ON HC.intpk_hardware_component_id=AI.intfk_item_type_id  
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=HC.infk_component_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HC.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where AI.intfk_item_id=8 AND 
+		(dte_problem_occured>=CONVERT(DATETIME, ' 00:00', 102) AND dte_problem_occured<=CONVERT(DATETIME, '12/5/2018 23:59', 102))  AND PH.int_fixed_user_id=76<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-05 13:23:21</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect *,U.str_firstname As str_fixed_user_f_name,U.str_lastname As str_fixed_user_l_name from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		LEFT OUTER JOIN [ComputerLog].[dbo].[tbl_user] AS U ON U.intpk_user_id=PH.int_fixed_user_id
+		INNER JOIN [ComputerLog].[dbo].[tbl_history_type] AS HIT ON  HIT.intpk_history_type=PH.intfk_history_type_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_component] AS HC ON HC.intpk_hardware_component_id=AI.intfk_item_type_id  
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=HC.infk_component_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HC.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where AI.intfk_item_id=8 AND 
+		(dte_problem_occured>=CONVERT(DATETIME, ' 00:00', 102) AND dte_problem_occured<=CONVERT(DATETIME, '12/5/2018 23:59', 102))  AND PH.int_fixed_user_id=62<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-05 13:23:49</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect *,U.str_firstname As str_fixed_user_f_name,U.str_lastname As str_fixed_user_l_name from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		LEFT OUTER JOIN [ComputerLog].[dbo].[tbl_user] AS U ON U.intpk_user_id=PH.int_fixed_user_id
+		INNER JOIN [ComputerLog].[dbo].[tbl_history_type] AS HIT ON  HIT.intpk_history_type=PH.intfk_history_type_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_component] AS HC ON HC.intpk_hardware_component_id=AI.intfk_item_type_id  
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=HC.infk_component_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HC.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where AI.intfk_item_id=8 AND 
+		(dte_problem_occured>=CONVERT(DATETIME, ' 00:00', 102) AND dte_problem_occured<=CONVERT(DATETIME, '12/5/2018 23:59', 102))  AND PH.int_fixed_user_id=62<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+

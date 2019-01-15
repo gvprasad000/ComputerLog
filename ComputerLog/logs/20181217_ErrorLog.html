@@ -1,0 +1,119 @@
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 08:42:53</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect *,HW.str_serial_no as str_hw_serial_no from [ComputerLog].[dbo].[tbl_hardware] AS HW INNER JOIN  [ComputerLog].[dbo].tbl_hardware_type AS HWT
+			ON HWT.intpk_hardware_type_id=HW.intfk_hardware_type_id
+		
+		INNER JOIN  [ComputerLog].[dbo].tbl_plant AS P	
+			ON P.intpk_plant_id=HW.intfk_plant_id
+		LEFT OUTER JOIN [ComputerLog].[dbo].tbl_hardware_software AS HWSW
+			ON HWSW.intfk_hardware_id=HW.intpk_hardware_id
+
+			where HW.intfk_hardware_type_id=1  ORDER BY HW.intpk_hardware_id<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 08:49:28</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect *,HW.str_serial_no as str_hw_serial_no from [ComputerLog].[dbo].[tbl_hardware] AS HW INNER JOIN  [ComputerLog].[dbo].tbl_hardware_type AS HWT
+			ON HWT.intpk_hardware_type_id=HW.intfk_hardware_type_id
+		
+		INNER JOIN  [ComputerLog].[dbo].tbl_plant AS P	
+			ON P.intpk_plant_id=HW.intfk_plant_id
+
+
+			where HW.intfk_hardware_type_id=1  ORDER BY HW.intpk_hardware_id<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 10:11:55</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect * from [ComputerLog].[dbo].[tbl_user] AS U INNER JOIN [ComputerLog].[dbo].[tbl_user_hardware] AS UH
+				ON UH.intfk_user_id=U.intpk_user_id INNER JOIN [ComputerLog].[dbo].[tbl_hardware] AS H
+				ON H.intpk_hardware_id=UH.intfk_hardware_id  INNER JOIN [ComputerLog].[dbo].[tbl_hardware_type] AS HT 
+				ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+				where U.str_firstname like '%%' <br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 10:25:49</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from [ComputerLog].[dbo].[tbl_user] AS U INNER JOIN [ComputerLog].[dbo].[tbl_user_hardware] AS UH
+				ON UH.intfk_user_id=U.intpk_user_id INNER JOIN [ComputerLog].[dbo].[tbl_hardware] AS H
+				ON H.intpk_hardware_id=UH.intfk_hardware_id  INNER JOIN [ComputerLog].[dbo].[tbl_hardware_type] AS HT 
+				ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+				where U.str_lastname like '%%' order by H.str_system_name AND H.str_system_name like '%%'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 11:25:16</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_hardware_software]0,,847,'null'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 11:25:16</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_hardware_software]0,,847,'null'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 11:25:16</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_hardware_software]0,,847,'null'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 11:25:16</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_hardware_software]0,,847,'null'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 11:25:41</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_hardware_software]0,,847,'null'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 11:25:41</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_hardware_software]0,,847,'null'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 11:25:41</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_hardware_software]0,,847,'null'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-17 11:25:41</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_hardware_software]0,,847,'null'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+

@@ -1,0 +1,78 @@
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-14 10:56:02</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_problem] 0,61,1,62,1,05/12/2018 12:54,'Testing'<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-14 14:05:30</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_component] AS HC ON HC.intpk_hardware_component_id=AI.intfk_item_type_id  
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=HC.infk_component_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HC.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where intfk_item_id=8 AND (dte_problem_occured>='2018-05-12 12:54 00:00' AND dte_problem_occured<=' 23:59')<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-14 14:12:45</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect * from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_component] AS HC ON HC.intpk_hardware_component_id=AI.intfk_item_type_id  
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=HC.infk_component_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HC.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where intfk_item_id=8 AND 
+		(dte_problem_occured>=CONVERT(DATETIME, '2018-05-12 00:00', 102) AND dte_problem_occured<=CONVERT(DATETIME, ' 23:59', 102))<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-14 14:28:12</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> zselect * from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_component] AS HC ON HC.intpk_hardware_component_id=AI.intfk_item_type_id  
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=HC.infk_component_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HC.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where intfk_item_id=8 AND 
+		(dte_problem_occured>=CONVERT(DATETIME, '2018-05-12 00:00', 102) AND dte_problem_occured<=CONVERT(DATETIME, '2018-05-12 23:59', 102))<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-14 14:36:09</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=AI.intfk_item_type_id  
+		where AI.intfk_item_id=6 AND 
+		(dte_problem_occured>=CONVERT(DATETIME, '2018-05-12 00:00', 102) AND dte_problem_occured<=CONVERT(DATETIME, '2018-05-12 23:59', 102))<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-14 14:36:56</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		INNER JOIN [ComputerLog].[dbo].[tbl_problem_history] AS PH ON PH.intfk_all_item_id=AI.intpk_all_item_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=AI.intfk_item_type_id  
+		where AI.intfk_item_id=6 AND 
+		(dte_problem_occured>=CONVERT(DATETIME, '2018-05-12 00:00', 102) AND dte_problem_occured<=CONVERT(DATETIME, '2018-05-12 23:59', 102))<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+

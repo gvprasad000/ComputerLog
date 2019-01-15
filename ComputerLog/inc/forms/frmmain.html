@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>SB Admin - Start Bootstrap Template</title>
+  <!-- Bootstrap core CSS-->
+
+</head>
+<style>
+
+
+.#scroll_div {
+    position: fixed;
+    height: 100%;
+}
+
+#scroll{
+    overflow-y: scroll;
+    height: 85%;
+}
+#scroll::-webkit-scrollbar { 
+  /* This is the magic bit */
+  display: none;
+}
+
+</style>
+<body >
+
+  <div ng-controller="MainController"  style="margin-top:-1250px" class="content-wrapper">
+    <div class="container-fluid">
+      <!-- Breadcrumbs-->
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Dashboard</a>
+        </li>
+        <li class="breadcrumb-item active">(Problems-Alerts)</li>
+      </ol>
+      
+        
+ <div id="scroll_div" class="table-wrapper-scroll-y" style="height:600px ">
+	<div id="scroll">
+	  <table  class="table table-bordered table-striped">
+	    <thead>
+	      <tr>
+	        <th scope="col">#</th>
+	        <th scope="col">Problem With</th>
+	        <th scope="col">History Type</th>
+	        <th scope="col">User Fixed</th>
+	        <th scope="col">Active</th>
+	        <th scope="col">Problem Description</th>
+	        <th scope="col">Date Occured</th>
+	        <th scope="col">Status</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr ng-repeat="LogGetAllProblem in LogGetAllProblems" >
+	        <th scope="row">{{$index + 1}}</th>
+	        <td id={{LogGetAllProblem['intpk_problem_history_id']}}><a data-toggle="modal" data-target="#LogDashboardProblemDialogue" ng-click="openProblemDialogue(LogGetAllProblem['intpk_problem_history_id'])" href="#">{{LogGetAllProblem['str_item_type_name']}}</a></td>
+	        <td>{{LogGetAllProblem['str_history_desc']}}</td>
+	        <td>{{LogGetAllProblem['str_firstname']+' '+LogGetAllProblem['str_lastname']}}</td>
+	        <td ng-if="LogGetAllProblem['bln_pblm']==1"><font style="color: red;" >YES</font></td>
+	        <td ng-if="LogGetAllProblem['bln_pblm']==0"><font style="color: green;" >NO</font></td>
+	        <td>{{LogGetAllProblem['str_pblm_desc']}}</td>
+	        <td>{{LogGetAllProblem['dte_problem_occured']}}</td>
+	      
+	        <td ng-if="LogGetAllProblem['bln_pblm']==0" ><a ng-click="recordProblem(LogGetAllProblem['intpk_problem_history_id'],LogGetAllProblem['bln_pblm']);" data-toggle="modal" data-target="#LogDashboardChangeStatus" href="#"><font style="color: green;"><i class="fa fa-check" aria-hidden="true"></font></i></a></td>
+	      	<td ng-if="LogGetAllProblem['bln_pblm']==1"><a  ng-click="recordProblem(LogGetAllProblem['intpk_problem_history_id'],LogGetAllProblem['bln_pblm']);" data-toggle="modal" data-target="#LogDashboardChangeStatus" href="#"><font style="color: red;"><i class="fa fa-times" aria-hidden="true"></i></font></i></a></td>   
+	      	
+	      </tr>
+	      
+	    </tbody>
+	  </table>
+
+	</div>
+ </div>
+ 
+ <!-- Schedule Days Alert--> 
+ 	<!-- Breadcrumbs-->
+<div class="form-row"> 	
+ <div style="margin-top: -60px" class="col-4" style="height:500px ">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="#">Schedule</a>
+        </li>
+        <li class="breadcrumb-item active">(Days-Alerts)</li>
+      </ol>
+      
+        
+ 	<div id="scroll_div" class="table-wrapper-scroll-y" >
+		    <div id="scroll">
+			  <table  class="table table-bordered table-striped">
+			    <thead>
+			      <tr>
+			        <th scope="col">#</th>
+			        <th scope="col">Schedule With</th>
+			        <th scope="col">Schedule Description</th>
+			      </tr>
+			    </thead>
+			    <tbody>
+			      <tr ng-repeat="LogscheduleDay in LogscheduleDays">
+			      	<th scope="row">{{$index + 1}}</th>
+			       	<td>{{LogscheduleDay['str_item_type_name']}}</td>
+			       	<td>{{LogscheduleDay['str_schedule_desc']}}</td>
+			      </tr>
+			      
+			    </tbody>
+			  </table>
+			</div>
+	 </div>
+ </div>
+ 
+  <!-- Schedule Week Alert--> 
+	 <!-- Breadcrumbs-->
+	 <div style="margin-top: -60px" class="col-4" style="height:500px ">
+	      <ol class="breadcrumb">
+	        <li class="breadcrumb-item">
+	          <a href="#">Schedule</a>
+	        </li>
+	        <li class="breadcrumb-item active">(Week-Alerts)</li>
+	      </ol>
+	      
+	        
+	 	<div id="scroll_div" class="table-wrapper-scroll-y" >
+			    <div id="scroll">
+				  <table  class="table table-bordered table-striped">
+				    <thead>
+				      <tr>
+				        <th scope="col">#</th>
+				        <th scope="col">Schedule With</th>
+				        <th scope="col">Day</th>
+				        <th scope="col">Schedule Description</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				      <tr ng-repeat="LogscheduleWeek in LogscheduleWeeks">
+				      	<th scope="row">{{$index + 1}}</th>
+				       	<td>{{LogscheduleWeek['str_item_type_name']}}</td>
+				       	<td ng-if="LogscheduleWeek['int_week']==1">Monday</td>
+				       	<td ng-if="LogscheduleWeek['int_week']==2">Tuesday</td>
+				       	<td ng-if="LogscheduleWeek['int_week']==3">Wednesday</td>
+				       	<td ng-if="LogscheduleWeek['int_week']==4">Thursday</td>
+				       	<td ng-if="LogscheduleWeek['int_week']==5">Friday</td>
+				       	<td ng-if="LogscheduleWeek['int_week']==6">Saturday</td>
+				       	<td ng-if="LogscheduleWeek['int_week']==7">Sunday</td>
+				       	<td>{{LogscheduleWeek['str_schedule_desc']}}</td>
+			      	  </tr>
+				      
+				    </tbody>
+				  </table>
+				</div>
+		 </div>
+	 </div>
+	 
+  <!-- Schedule Month Alert--> 
+	 <!-- Breadcrumbs-->
+	 <div style="margin-top: -60px" class="col-4" style="height:500px ">
+	      <ol class="breadcrumb">
+	        <li class="breadcrumb-item">
+	          <a href="#">Schedule</a>
+	        </li>
+	        <li class="breadcrumb-item active">(Month-Alerts)</li>
+	      </ol>
+	      
+	        
+	 	<div id="scroll_div" class="table-wrapper-scroll-y" >
+			    <div id="scroll">
+				  <table  class="table table-bordered table-striped">
+				    <thead>
+				      <tr>
+				        <th scope="col">#</th>
+				        <th scope="col">Schedule With</th>
+				        <th scope="col">Day</th>
+				        <th scope="col">Schedule Description</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				      <tr ng-repeat="LogscheduleMonth in LogscheduleMonths">
+				      	<th scope="row">{{$index + 1}}</th>
+				       	<td>{{LogscheduleMonth['str_item_type_name']}}</td>
+				       	<td>{{LogscheduleMonth['int_month']}}</td>
+				       	<td>{{LogscheduleMonth['str_schedule_desc']}}</td>
+			      	  </tr>
+				      
+				    </tbody>
+				  </table>
+				</div>
+		 </div>
+	 </div>
+
+ </div>
+ 
+ 		<div class="modal fade" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true" id="LogDashboardChangeStatus">
+		  <div class="modal-dialog modal-sm">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		       
+		        <h4 class="modal-title" id="myModalLabel">Conformation</h4>
+		         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" ng-click="logChangeActiveStatus()" class="btn btn-default" id="modal-btn-si">Yes</button>
+		        <button type="button" class="btn btn-primary" data-dismiss="modal" id="modal-btn-no">No</button>
+		      </div>
+		    </div>
+		  </div>
+		</div>
+
+
+ 		
+ 		
+ 
+ 		<div class="modal fade" id="LogDashboardChangeStatus" tabindex="-1" role="dialog" aria-labelledby="LogDashboardChangeStatus" aria-hidden="true">
+	     <div class="modal-dialog modal-sm"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-12">
+	            	<h5 class="modal-title" id="LogDashboardChangeStatus">Resolve Problem</h5> 
+	              </div>
+	              
+	             
+	            </div>
+	          </div>
+	        </div>
+	        
+	        		<div   class="container">
+
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-3">
+							                 <button class="btn btn-secondary" ng-click="saveLogHistoryProblem()" type="button" data-dismiss="modal"><i class="fa fa-floppy-o" aria-hidden="true"></i> Resolve</button> 
+						            </div>
+						              <div style="margin-left: 50px" class="col-md-3">
+	          							     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+						            </div>
+						          </div>     
+							  
+							</div>
+
+	        </div>
+	      </div>
+	    </div>
+ 
+  
+ 
+ 
+  </div>
+  </div>
+  
+  
+  
+   <div ng-controller="LogHistoryProblemController" class="modal fade" id="LogDashboardProblemDialogue" tabindex="-1" role="dialog" aria-labelledby="LogDashboardProblems" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-12">
+	            	<h5 class="modal-title" id="LogDashboardProblemsTitle">Dashboard Problems</h5> 
+	              </div>
+	              
+	             
+	            </div>
+	          </div>
+	        </div>
+	        
+	        		<div   class="container">
+							  <h3 id="intpk_problem_id" name="">Problem</h3>
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">Problem <font color="red">*</font></label>
+							                 <select id="" ng-model="logItemTypeId" ng-change="logItemTypeselected(logItemTypeId)"  style="width: 435px;" required  class="form-control">
+							                 		<option value=""  selected>select problem with</option>
+											 	    <option ng-repeat="logGetItemTable in logGetItemTables" value={{logGetItemTable['intpk_item_type_id']}}>{{logGetItemTable['str_item_type_name']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>	
+						          
+						       	  <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logProblemItem">Item <font color="red">*</font></label>
+							                 <select id="" ng-model="logProblemItemId"  style="width: 435px;" required class="form-control">
+							                 		<option value=""  selected>select Item</option>
+											 	    <option ng-if="SelectedItemTable==6" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_component_id']}}>{{AllItem['str_component_name']}}</option>
+											 	    <option ng-if="SelectedItemTable==7" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_hardware_id']}}>{{AllItem['str_hardware_desc']+' ('+AllItem['str_system_id']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==8" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_hardware_component_id']}}>{{AllItem['str_hardware_desc']+' -'+AllItem['str_system_id']+' ('+AllItem['str_component_name']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==14" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_hardware_software_id']}}>{{AllItem['str_hardware_desc']+' -'+AllItem['str_system_id']+' ('+AllItem['str_software_desc']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==5" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_hardware_type_id']}}>{{AllItem['str_hardware_desc']}}</option>
+											 	    <option ng-if="SelectedItemTable==15" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_history_type']}}>{{AllItem['str_history_desc']}}</option>
+											 	    <option ng-if="SelectedItemTable==9" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_ip_address_id']}}>{{AllItem['str_hardware_desc']+' -'+AllItem['str_system_id']+' ('+AllItem['str_ip_desc']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==2" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_map_drive_id']}}>{{AllItem['str_link_desc']}}</option>
+											 	    <option ng-if="SelectedItemTable==12" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_software_id']}}>{{AllItem['str_software_name']}}</option>
+											 	    <option ng-if="SelectedItemTable==13" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_software_record_id']}}>{{AllItem['str_software_name']+'('+AllItem['str_software_desc']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==1" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_user_id']}}>{{AllItem['str_firstname']+' '+AllItem['str_lastname']}}</option>
+											 	    <option ng-if="SelectedItemTable==11" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_user_hardware_id']}}>{{AllItem['str_hardware_desc']+'-'+AllItem['str_system_id']+'('+AllItem['str_firstname']+' '+AllItem['str_lastname']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==3" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_user_map_drive_id']}}>{{AllItem['str_firstname']+' '+AllItem['str_lastname']+'-'+AllItem['str_link_desc']+' -('+AllItem['str_letter_desc']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==4" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_vpn_id']}}>{{AllItem['str_firstname']+' '+AllItem['str_lastname']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>  
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">History Type <font color="red">*</font></label>
+							                 <select id="" ng-model="logProblemTypeId"   style="width: 435px;" required  class="form-control">
+							                 		<option value=""  selected>select problem type</option>
+											 	    <option ng-repeat="logProblemType in logProblemTypes" value={{logProblemType['intpk_history_type']}}>{{logProblemType['str_history_desc']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>   
+						          
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">Problem Desc </label>
+							               <textarea ng-model="LogProblemDesc" name="Text1" cols="59" rows="4"></textarea> 
+						              </div>
+						            </div>
+						          </div>   
+						          
+ 
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-3">
+						                <label  for="LogProblemDteOccured">Date Occured </label>
+							               <input style="width: 210px" class="form-control" ng-model="LogProblemDteOccured" id="log_problem_dte_occured" type="text" aria-describedby="nameHelp" required placeholder="MM/DD/YYYY HH:MM">
+						              </div>
+						              <div style="margin-left: 30px" class="col-md-3">
+						                <label  for="LogProblemDteOccured">Active</label>
+							               <select id="logProblemActive" ng-model="logProblemActive"   style="width: 210px;" required class="form-control">
+							                 		<option value=""  selected>select Active type</option>
+											 	    <option value="1">Yes</option>
+											 	    <option value="0">No</option>
+											 	    
+											 </select>   
+						              </div>
+						            </div>
+						          </div>
+						          
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-3">
+						                <label  for="logSoftwareName">User Fixed </label>
+							                 <select id="" ng-model="logProblemUserFixed"   style="width: 210px;"  class="form-control">
+							                 		<option value=""  selected>select Fixed User</option>
+											 	    <option ng-repeat="LogAllUser in LogAllUsers" value={{LogAllUser['intpk_user_id']}}>{{LogAllUser['str_firstname']+' '+LogAllUser['str_lastname']}}</option>
+											 </select>  
+									  </div>
+									   <div style="margin-left: 30px" class="col-md-3">
+						                <label  for="LogProblemDteResolution">Date Resolution </label>
+							               <input style="width: 210px" class="form-control" ng-model="LogProblemDteResolution" id="log_problem_dte_resolution" type="text" aria-describedby="nameHelp" placeholder="MM/DD/YYYY HH:MM">
+						              </div>
+						            </div>
+						          </div> 
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logProblemResolutionDesc">Resolution Desc </label>
+							               <textarea ng-model="LogProblemResolutionDesc" name="Text1" cols="59" rows="4"></textarea> 
+						              </div>
+						            </div>
+						          </div>     
+							  
+							</div>
+	        
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" ng-click="saveLogHistoryProblem()" type="button" data-dismiss="modal"><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+  
+  
+</body>
+
+</html>

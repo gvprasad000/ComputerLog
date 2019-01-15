@@ -1,0 +1,55 @@
+ <html ng-app="myApp">
+
+ 	<div  style="margin-top:-1250px" id="" ng-controller="LogReportController" class="container">
+ 		<div  class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header"><b>Reports</b></div>
+      <div class="card-body">
+			<form data-toggle="validator" role="form" ng-submit="saveLogSoftware()" >
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+				
+				  			<ul class="nav nav-tabs">
+							    <li><a ng-click="selectScreen(1)" data-toggle="tab" href="">User</a></li>
+							    <li><a ng-click="selectScreen(2)" style="margin-left: 15px"  data-toggle="tab" href="">Hardware</a></li>
+							    <li><a ng-click="selectScreen(3)" style="margin-left: 15px"  data-toggle="tab" href="">Software</a></li>
+							    
+							    
+							</ul>	 
+				
+				
+			
+				 	<br>
+						<!-------------------- Software -------------------------------->
+							 
+							<div id="log_report_user" ng-show="ShowReportUser" class="container">
+							  
+							
+							</div>
+							
+							  
+							
+							
+							
+							<!---------------- Map Hardware / Software  ---------------------------->
+							
+						
+							
+				
+							
+						
+	 
+							 
+			
+				 	</div>
+				 
+				 </div>
+				</div>
+			
+			</form>
+	</div>
+	</div>
+	
+	
+	</div>
+</html>	

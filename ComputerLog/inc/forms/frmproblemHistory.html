@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<style>
+	.multiselect {
+	  width: 200px;
+	}
+	
+	.selectBox {
+	  position: relative;
+	}
+	
+	.selectBox select {
+	  width: 100%;
+	  font-weight: bold;
+	}
+	
+	.overSelect {
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	}
+	
+	#checkboxes {
+	  display: none;
+	  border: 1px #dadada solid;
+	}
+	
+	#checkboxes label {
+	  display: block;
+	}
+	
+	#checkboxes label:hover {
+	  background-color: #1e90ff;
+	}
+</style>
+
+</head>
+
+	
+
+
+<div  style="margin-top:-1250px" id="" ng-controller="LogHistoryProblemController" class="container">
+
+ <div  class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header"><b>Problem-History</b></div>
+      <div class="card-body">
+			<form data-toggle="validator" role="form" ng-submit="saveLogHistoryProblem()" >
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+				
+				  			<ul class="nav nav-tabs">
+							    <li><a ng-click="logProblemHistoryTab('History')" data-toggle="tab" href="">History-Type</a></li>
+							    <li><a ng-click="logProblemHistoryTab('Problem');logGetItemTable();logProblemType();logAllUser();" style="margin-left: 15px"  data-toggle="tab" href="">Problem</a></li>
+							    
+							    
+							</ul>	 
+				
+				    <div id="disclaimer_body" class="panel-body">
+			
+				 	<br>
+						<!-------------------- History-Type screen -------------------------------->
+							 
+						<div  ng-show="ShowHistory" class="container">
+							  <h3 id="intpk_history_type" name="0">History</h3>
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">History Type Name <font color="red">*</font></label>
+						                <input style="width: 435px" class="form-control" ng-model="log_history_type" id="log_history_type" type="text" aria-describedby="nameHelp" placeholder="Enter History Type">
+						              </div>
+						               
+						          </div>
+						          </div>	
+						          
+						       	         
+						    
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_history" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogHistorySearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+
+						              </div>
+						            </div>
+						          </div>
+							  
+							</div>
+							
+							
+					<!---------------- Problem Screen ---------------------------->
+							
+									 
+						<div  ng-show="ShowProblem" class="container">
+							  <h3 id="intpk_problem_id" name="0">Problem</h3>
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">Problem <font color="red">*</font></label>
+							                 <select id="logItemTypeId" ng-model="logItemTypeId" ng-change="logItemTypeselected(logItemTypeId)"  style="width: 435px;"  class="form-control">
+							                 		<option value=""  selected>select problem with</option>
+											 	    <option ng-repeat="logGetItemTable in logGetItemTables" value={{logGetItemTable['intpk_item_type_id']}}>{{logGetItemTable['str_item_type_name']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>	
+						          
+						       	  <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logProblemItem">Item <font color="red">*</font></label>
+							                 <select id="logProblemItemId" ng-model="logProblemItemId"  style="width: 435px;"  class="form-control">
+							                 		<option value=""  selected>select Item</option>
+											 	    <option ng-if="SelectedItemTable==6" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_component_id']}}>{{AllItem['str_component_name']}}</option>
+											 	    <option ng-if="SelectedItemTable==7" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_hardware_id']}}>{{AllItem['str_hardware_desc']+' ('+AllItem['str_system_id']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==8" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_hardware_component_id']}}>{{AllItem['str_hardware_desc']+' -'+AllItem['str_system_id']+' ('+AllItem['str_component_name']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==14" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_hardware_software_id']}}>{{AllItem['str_hardware_desc']+' -'+AllItem['str_system_id']+' ('+AllItem['str_software_desc']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==5" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_hardware_type_id']}}>{{AllItem['str_hardware_desc']}}</option>
+											 	    <option ng-if="SelectedItemTable==15" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_history_type']}}>{{AllItem['str_history_desc']}}</option>
+											 	    <option ng-if="SelectedItemTable==9" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_ip_address_id']}}>{{AllItem['str_hardware_desc']+' -'+AllItem['str_system_id']+' ('+AllItem['str_ip_desc']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==2" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_map_drive_id']}}>{{AllItem['str_link_desc']}}</option>
+											 	    <option ng-if="SelectedItemTable==12" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_software_id']}}>{{AllItem['str_software_name']}}</option>
+											 	    <option ng-if="SelectedItemTable==13" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_software_record_id']}}>{{AllItem['str_software_name']+'('+AllItem['str_software_desc']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==1" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_user_id']}}>{{AllItem['str_firstname']+' '+AllItem['str_lastname']}}</option>
+											 	    <option ng-if="SelectedItemTable==11" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_user_hardware_id']}}>{{AllItem['str_hardware_desc']+'-'+AllItem['str_system_id']+'('+AllItem['str_firstname']+' '+AllItem['str_lastname']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==3" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_user_map_drive_id']}}>{{AllItem['str_firstname']+' '+AllItem['str_lastname']+'-'+AllItem['str_link_desc']+' -('+AllItem['str_letter_desc']+')'}}</option>
+											 	    <option ng-if="SelectedItemTable==4" ng-repeat="AllItem in AllItems" value={{AllItem['intpk_vpn_id']}}>{{AllItem['str_firstname']+' '+AllItem['str_lastname']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>  
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">History Type <font color="red">*</font></label>
+							                 <select id="logProblemTypeId" ng-model="logProblemTypeId"   style="width: 435px;"   class="form-control">
+							                 		<option value=""  selected>select problem type</option>
+											 	    <option ng-repeat="logProblemType in logProblemTypes" value={{logProblemType['intpk_history_type']}}>{{logProblemType['str_history_desc']}}</option>
+											 </select>   
+						              </div>
+						            </div>
+						          </div>   
+						          
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">Problem Desc </label>
+							               <textarea ng-model="LogProblemDesc" name="Text1" cols="59" rows="4"></textarea> 
+						              </div>
+						            </div>
+						          </div>   
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="LogProblemDteOccured">Date Occured <font color="red">*</font></label>
+							               <input id="LogProblemDteOccured" style="width: 210px" class="form-control" ng-model="LogProblemDteOccured" id="log_problem_dte_occured" type="text" aria-describedby="nameHelp"  placeholder="MM/DD/YYYY HH:MM">
+						              </div>
+						              <div class="col-md-6">
+						                <label  for="LogProblemDteOccured">Active <font color="red">*</font></label>
+							               <select id="logProblemActive" ng-model="logProblemActive"   style="width: 210px;"  class="form-control">
+							                 		<option value=""  selected>select Active type</option>
+											 	    <option value="1">Yes</option>
+											 	    <option value="0">No</option>
+											 	    
+											 </select>   
+						              </div>
+						            </div>
+						          </div>
+						          
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwareName">User Fixed </label>
+							                 <select id="" ng-model="logProblemUserFixed"   style="width: 210px;"  class="form-control">
+							                 		<option value=""  selected>select Fixed User</option>
+											 	    <option ng-repeat="LogAllUser in LogAllUsers" value={{LogAllUser['intpk_user_id']}}>{{LogAllUser['str_firstname']+' '+LogAllUser['str_lastname']}}</option>
+											 </select>  
+									  </div>
+									   <div class="col-md-6">
+						                <label  for="LogProblemDteResolution">Date Resolution </label>
+							               <input style="width: 210px" class="form-control" ng-model="LogProblemDteResolution" id="log_problem_dte_resolution" type="text" aria-describedby="nameHelp" placeholder="MM/DD/YYYY HH:MM">
+						              </div>
+						            </div>
+						          </div>  
+						          
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logProblemResolutionDesc">Resolution Desc </label>
+							               <textarea ng-model="LogProblemResolutionDesc" name="Text1" cols="59" rows="4"></textarea> 
+						              </div>
+						            </div>
+						          </div> 
+						           
+						    
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_history" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogProblemSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+
+						              </div>
+						            </div>
+						          </div>
+						          
+						          
+							  
+							</div>
+				
+							
+						
+	 
+							 
+			
+				 	</div>
+				 
+				 </div>
+				</div>
+			
+			</form>
+	</div>
+	</div>
+	</div>
+	
+	
+	
+	
+	
+	    <div class="modal fade" id="LogHistorySearch" tabindex="-1" role="dialog" aria-labelledby="LogHistorySearch" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-6">
+	            	<h5 class="modal-title" id="LogHistorySearch">History-Type Search</h5> 
+	              </div>
+	              
+	              <div class="col-3">
+	                <input style="width: 225px" class="form-control" ng-model="log_history_type_search" id="log_history_type_search" type="text" placeholder="History type">
+	              </div>
+	               <div  class="col-3">
+	              	 <button style="margin-left: 125px" id="log_history_type_search_btn" ng-click="logHistoryTypeSearch()"  class="btn btn-primary btn-block " > Search</button>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>History-Type</th>
+	                                        <th>Delete</th>
+	                                        
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr ng-repeat="logHistoryType in logHistoryTypes">
+	                                        <td id={{logHistoryType['intpk_history_type']}}><a ng-click="logHistoryTypeSelectedItem(logHistoryType['intpk_history_type'],logHistoryType['str_history_desc'])" href="#">{{logHistoryType['str_history_desc']}}</a></td>
+											<td><button id={{'delete_history_type_id_'+logHistoryType['intpk_history_type']}} ng-click="logHistoryTypeRecordDelete(logHistoryType['intpk_history_type'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button></td>
+	                                    </tr>
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	
+	
+	<div class="modal fade" id="LogProblemSearch" tabindex="-1" role="dialog" aria-labelledby="LogHistorySearch" aria-hidden="true">
+		     <div class="modal-dialog modal-lg"  >
+		        <div class="modal-content">
+		          <div class="modal-header">
+		           <div class="form-group">
+		            <div class="form-row">
+		              <div class="col-3">
+		            	<h5 class="modal-title" id="">Problem</h5> 
+		              </div>
+		              
+		              <div class="col-2">
+		                 <select id="" ng-model="logProblemSearchItemTypeId"   style="width: 195px;;margin-left: -50px" class="form-control">
+	                 		<option value=""  selected>select problem with</option>
+					 	    <option ng-repeat="logGetItemTable in logGetItemTables" value={{logGetItemTable['intpk_item_type_id']}}>{{logGetItemTable['str_item_type_name']}}</option>
+						</select> 
+		              </div>
+		              <div class="col-md-2">
+			               <input style="width: 120px;margin-left: 30px" class="form-control" ng-model="LogProblemSearchStartDte" id="log_problem_search_dte_start" type="text" aria-describedby="nameHelp"  placeholder="Start dte">
+				      </div>
+				       <div class="col-md-2">
+			               <input style="width: 120px;margin-left: 40px" class="form-control" ng-model="LogProblemSearchEndDte" id="log_problem_search_dte_end" type="text" aria-describedby="nameHelp"  placeholder="End Dte">
+				      </div>
+		               <div  class="col-2">
+		              	 <button style="margin-left: 95px" id="log_search_dialogue" ng-click="logproblemSearch()"  class="btn btn-primary btn-block " > Search</button>
+		              </div>
+		            </div>
+		             <div style="margin-left: 180px" class="form-row">
+			            <div class="col-2">
+			                 <select id="" ng-model="logProblemSearchUserFixed"   style="width: 195px;;margin-left: -50px" class="form-control">
+		                 		<option value=""  selected>select User</option>
+						 	    <option ng-repeat="LogAllUser in LogAllUsers" value={{LogAllUser['intpk_user_id']}}>{{LogAllUser['str_firstname']+' '+LogAllUser['str_lastname']}}</option>
+							</select> 
+			             </div>
+		             </div>
+		           
+		          </div>
+		        </div>
+		        
+		        
+		        <div class="container">
+		                        
+                     <div class="wrapper" >
+                         
+                         <div class="panel-body table-responsive">
+                          
+                         <table    class="table table-bordered">
+                             <thead>
+                                 <tr>
+                                     <th>Type Desc</th>
+                                     <th>History Type</th>
+                                     <th>User Fixed</th>
+                                     <th>Active</th>
+                                     <th>Problem Description</th>
+                                     <th>Date</th>
+                                 </tr>
+                             </thead>
+                             <tbody id="LogProblemSearchTable"  name="1" >
+                                     <tr ng-repeat="LogProblemSearchData in LogProblemSearchDatas">
+                                   
+											 	    <td ng-if="searchId==6" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#"> {{LogProblemSearchData['str_component_name']}}</a></td>
+											 	    <td ng-if="searchId==7" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_hardware_desc']+' ('+LogProblemSearchData['str_system_id']+')'}}</a></td>
+											 	    <td ng-if="searchId==8" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_hardware_desc']+' -'+LogProblemSearchData['str_system_id']+' ('+LogProblemSearchData['str_component_name']+')'}}</a></td>
+											 	    <td ng-if="searchId==14" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_hardware_desc']+' -'+LogProblemSearchData['str_system_id']+' ('+LogProblemSearchData['str_software_desc']+')'}}</a></td>
+											 	    <td ng-if="searchId==5" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_hardware_desc']}}</a></td>
+											 	    <td ng-if="searchId==15" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_history_desc']}}</a></td>
+											 	    <td ng-if="searchId==9" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_hardware_desc']+' -'+LogProblemSearchData['str_system_id']+' ('+LogProblemSearchData['str_ip_desc']+')'}}</a></td>
+											 	    <td ng-if="searchId==2" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_link_desc']}}</a></td>
+											 	    <td ng-if="searchId==12" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_software_name']}}</a></td>
+											 	    <td ng-if="searchId==13" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_software_name']+'('+LogProblemSearchData['str_software_desc']+')'}}</a></td>
+											 	    <td ng-if="searchId==1" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_firstname']+' '+LogProblemSearchData['str_lastname']}}</a></td>
+											 	    <td ng-if="searchId==11" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_hardware_desc']+'-'+LogProblemSearchData['str_system_id']+'('+LogProblemSearchData['str_firstname']+' '+LogProblemSearchData['str_lastname']+')'}}</a></td>
+											 	    <td ng-if="searchId==3" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_firstname']+' '+LogProblemSearchData['str_lastname']+'-'+LogProblemSearchData['str_link_desc']+' -('+LogProblemSearchData['str_letter_desc']+')'}}</a></td>
+											 	    <td ng-if="searchId==4" id={{LogProblemSearchData['intpk_problem_history_id']}}><a ng-click="logProblemSelectedItem(LogProblemSearchData['intpk_problem_history_id'])" href="#">{{LogProblemSearchData['str_firstname']+' '+LogProblemSearchData['str_lastname']}}</a></td>
+											 	    
+											 	    <td id={{LogProblemSearchData['str_history_desc']}}>{{LogProblemSearchData['str_history_desc']}}</td>
+											 	    <td id="">{{LogProblemSearchData['str_fixed_user_f_name']+' '+LogProblemSearchData['str_fixed_user_l_name']}}</td>
+											 	    <td>{{LogProblemSearchData['bln_pblm']}}</td>
+											 	    <td>{{LogProblemSearchData['str_pblm_desc']}}</td>
+											 	    <td>{{LogProblemSearchData['dte_problem_occured']}}</td>
+											 	    
+                                 </tr>
+                            
+                             
+                             </tbody>
+                         </table>
+                         </div>
+                     </div>
+		        </div>
+		        
+		        
+		        
+		          <div class="modal-footer">
+		            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+		           
+		          </div>
+		        </div>
+		      </div>
+	    </div>
+	
+	
+	
+	
+	
+	        
+	        
+	   
+	    
+	   
+	    
+	   
+	    
+	    
+	    
+	      
+	
+	</div>
+
+
+
+
+</html>

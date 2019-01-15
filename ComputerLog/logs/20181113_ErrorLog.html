@@ -1,0 +1,83 @@
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-13 14:20:26</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_component] AS HC ON HC.intpk_hardware_component_id=AI.intfk_item_type_id  
+		INNER JOIN  [ComputerLog].[dbo].[tbl_component] AS C ON C.intpk_component_id=HC.intfk_component_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HC.intfk_hardware_id 
+		where intfk_item_id=8<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-13 14:36:14</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_software] AS HS ON HS.intpk_hardware_software_id=AI.intfk_item_type_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_software_record] AS SR ON SR.intpk_software_record_id=HS.intfk_software_record_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HC.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where intfk_item_id=14<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-13 14:59:09</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from  [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN  [ComputerLog].[dbo].[tbl_ip_address] AS IA ON IA.intpk_ip_address_id=AI.intfk_item_type_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=IP.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		where intfk_item_id=9<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-13 15:04:53</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN tbl_map_drive AS MD MD.intpk_map_drive_id=AI.intfk_item_type_id
+		where intfk_item_id=2<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-13 15:05:39</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_map_drive] AS MD MD.intpk_map_drive_id=AI.intfk_item_type_id
+		where intfk_item_id=2<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-13 15:21:15</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_user_hardware] AS UH ON UH.intpk_user_hardware_id=AI.intfk_item_type_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=UH.intfk_hardware_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_hardware_type] AS HT ON HT.intpk_hardware_type_id=H.intfk_hardware_type_id
+		INNER JOIN [ComputerLog].[dbo].[tbl_user] AS U ON U.intpk_user_id=UH.intfk_item_type_id
+		where intfk_item_id=11<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-13 15:33:41</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from [ComputerLog].[dbo].[tbl_all_item] AS AI
+		INNER JOIN [ComputerLog].[dbo].[tbl_user_map_drive] AS UMD ON UMD.intpk_user_map_drive_id=AI.intfk_item_type_id
+		INNER JOIN  [ComputerLog].[dbo].[tbl_map_drive] AS MD ON MD.intpk_map_drive_id=UMD.intfk_map_drive_id 
+		INNER JOIN  [ComputerLog].[dbo].[tbl_letter] AS L ON L.intpk_letter_id=UMD.intfk_letter_id
+		INNER JOIN [ComputerLog].[dbo].[tbl_user] AS U ON U.intpk_user_id=UMD.intfk_user_id
+		where intfk_item_id=3<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> problemHistory.php-->ajxLogHistoryProblem.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+

@@ -1,0 +1,415 @@
+ <html ng-app="myApp">
+ 
+ <div  style="margin-top:-1250px" id="" ng-controller="LogUserController" class="container">
+ <div  class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header"><b>User Account</b></div>
+      <div class="card-body">
+<form data-toggle="validator" role="form" ng-submit="saveLogUser()" novalidate>
+<div class="col-md-10 col-md-offset-1">
+	<div class="panel panel-default">
+	
+	  			<ul class="nav nav-tabs">
+				    <li><a ng-click="logUserTab('user')" data-toggle="tab" href="">User</a></li>
+				    <li><a style="margin-left: 15px" ng-click="logUserTab('drive');logMapDriveTab()" data-toggle="tab" href="#drive">Map Drive</a></li>
+				    <li><a style="margin-left: 15px" ng-click="logUserTab('vpn');logMapDriveTab()" data-toggle="tab" href="#vpn">VPN</a></li>
+				    
+				  </ul>	 
+	
+	    <div id="disclaimer_body" class="panel-body">
+
+	 	<br>
+				 
+			<div  ng-show="userTab" class="container">
+				  		  <h3>User</h3>
+						<div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			                <label id="log_user_id" ng-model="log_user_id" for="logUserFirstName">First name <font color="red">*</font></label>
+			                <input class="form-control" ng-model="log_user_firstname" id="log_user_first_name" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
+			              </div>
+			              <div class="col-md-6">
+			                <label for="logUserLastName">Last name</label>
+			                <input class="form-control" ng-model="log_user_lastname" id="log_user_last_name" type="text" aria-describedby="nameHelp" placeholder="Enter last name">
+			              </div>
+			            </div>
+			          </div>
+			          <div class="form-group">
+			           <div class="form-row">
+				           <div class="col-md-6">
+				            <label for="logUserEmailAddress">Email address</label>
+				            <input class="form-control" ng-model="log_user_email" id="log_user_email" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+				          </div>
+				          <div class="col-md-6">
+				            <label for="logUserUsername">Username</label>
+			                <input class="form-control" ng-model="log_user_username" id="log_user_user_name" type="text" placeholder="UserName"> </div>
+			          </div>
+			          </div>
+			          <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			               <label for="logUserDomain">Domian <font color="red">*</font></label>
+			                <input class="form-control" ng-model="log_user_domain" id="log_user_domain" type="text" placeholder="Domain">
+			               </div>
+			              <div class="col-md-6">
+			                <label for="logUserLocation">Location</label>
+			                <input class="form-control" ng-model="log_user_location" id="log_user_location" type="text" placeholder="Location">
+			              </div>
+			            </div>
+			          </div>
+			            <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			               <label for="logUserPhone">Phone</label>
+			                <input class="form-control" ng-model="log_user_phone" id="log_user_phone" type="text" placeholder="Phone">
+			               </div>
+			              <div class="col-md-3">
+			                <label for="logUserExtension">Extension</label>
+			                <input class="form-control" ng-model="log_user_extension" id="log_user_extension" type="text" placeholder="Extension">
+			              </div>
+			               <div class="col-md-3">
+			                <label for="logUserInternet">Internet</label>
+			               <select   ng-model="log_user_internet" class="form-control">
+							 	<option value="">select..</option>	
+							 	 <option  value="1">Yes</option>
+							 	  <option  value="0">No</option>											   												 
+							</select>  
+			            </div>
+			            </div>
+			          </div>
+			           <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			              	 <button id="log_save_user" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+			               </div>
+			              <div class="col-md-6">
+			               <button  data-toggle="modal" type="button" data-target="#LogUserSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+						
+						
+				
+			
+			               	 <!-- <button ng-click="openDialogUserSearch()" class="btn btn-primary btn-block" ><i class="fa fa-search" aria-hidden="true"></i> Search</button> -->
+			              </div>
+			            </div>
+			          </div>
+				  
+				</div>
+				
+				
+				
+				
+				<div class="tab-content">
+				    <div  ng-show="vpnTab" id="vpn" class="tab-pane fade in active">
+				      <h3 id="UserVpnHeader" name="">VPN</h3>
+				    	<div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			                <label id="log_user_vpn_id"  for="logUserVPN">User <font color="red">*</font></label>
+			                <select  style="width: 475px" ng-model="log_user_vpn" class="form-control">
+							 	<option value="">select..</option>	
+							 	 <option ng-repeat="LogAllUser in LogAllUsers"  value={{LogAllUser['intpk_user_id']}}>{{LogAllUser['str_firstname']}}</option>											   												 
+							</select>  </div>    
+			            </div>
+			          </div>  
+			          
+			             <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			                <label id="log_user_vpn_desc"  for="logMapdriveNew">Vpn Id <font color="red">*</font></label>
+			                 <input style="width: 475px"  class="form-control" ng-model="log_user_vpn_desc" id="log_user_vpn_desc" type="text" placeholder="enter Vpn Id..">
+			       		  </div>    
+			            </div>
+			          </div>
+			          
+			          <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			              	 <button id="log_save_user_vpn" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+			               </div>
+			              <div class="col-md-6">
+			               <button  data-toggle="modal" type="button" data-target="#LogUserVpnSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+			
+			               	 <!-- <button ng-click="openDialogUserSearch()" class="btn btn-primary btn-block" ><i class="fa fa-search" aria-hidden="true"></i> Search</button> -->
+			              </div>
+			            </div>
+			          </div>
+			          
+					</div>
+				    <div ng-show="mapdriveTab" id="drive" class="tab-pane fade">
+				      <h3 id="UserMapDriveHeader" name="">Drive</h3>
+				      	<div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			                <label id="log_user_id"  for="logUsers">User <font color="red">*</font></label>
+			                <select ng-change="userMapDriverLetters(log_map_drive_user)" style="width: 475px" ng-model="log_map_drive_user" class="form-control">
+							 	<option value="">select..</option>	
+							 	 <option ng-repeat="LogAllUser in LogAllUsers"  value={{LogAllUser['intpk_user_id']}}>{{LogAllUser['str_firstname']}}</option>											   												 
+							</select>  </div>    
+			            </div>
+			          </div>
+			          
+			          	<div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			                <label id="log_user_map_drive" for="logMapDriveName">Map Drive <font color="red">*</font></label>
+			                <select ng-change="logMapdriveNameChange(log_mapdrive_name)" style="width: 475px" ng-model="log_mapdrive_name" class="form-control">
+							 	<option value="">select..</option>	
+							 	 <option ng-repeat="LogAllMapDrive in LogAllMapDrives"  value={{LogAllMapDrive['intpk_map_drive_id']}}>{{LogAllMapDrive['str_link_desc']}}</option>											   												 
+							</select>  </div>    
+			            </div>
+			          </div>
+			          
+			            <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			                <label id="log_user_map_drive_new"  for="logMapdriveNew">Map Drive New</label>
+			                 <input style="width: 475px"  class="form-control" ng-model="log_mapdrive_new_name" id="log_user_location" type="text" placeholder="Mapdrive name">
+			       		  </div>    
+			            </div>
+			          </div>
+			          
+			          <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			                <label id="log_user_map_drive_letter" for="logmap_drive_letter">Letter <font color="red">*</font></label>
+			                <select   style="width: 475px" ng-model="log_map_drive_letter" class="form-control">
+							 	<option value="">select..</option>	
+							 	 <option ng-repeat="LogAllLetter in LogAllLetters"   value={{LogAllLetter['intpk_letter_id']}}>{{LogAllLetter['str_letter_desc']}} </option>
+																   												 
+							</select>  </div>    
+			            </div>
+			          </div>
+			          
+			           <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			              	 <button id="log_save_user_map_drive" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+			               </div>
+			              <div class="col-md-6">
+			               <button  data-toggle="modal" type="button" data-target="#LogUserMapDriveSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+			
+			               	 <!-- <button ng-click="openDialogUserSearch()" class="btn btn-primary btn-block" ><i class="fa fa-search" aria-hidden="true"></i> Search</button> -->
+			              </div>
+			            </div>
+			          </div>
+			          
+				    </div>
+				 </div>
+
+	 	</div>
+	 
+	 </div>
+	</div>
+
+</form>
+	</div>
+	</div>
+	</div>
+	
+	
+
+ <div class="modal fade" id="LogUserSearch" tabindex="-1" role="dialog" aria-labelledby="LogUserSearch" aria-hidden="true">
+     <div class="modal-dialog modal-lg"  >
+        <div class="modal-content">
+          <div class="modal-header">
+           <div class="form-group">
+            <div class="form-row">
+              <div class="col-6">
+            	<h5 class="modal-title" id="exampleModalLabel">User Search</h5> 
+              </div>
+              
+              <div class="col-3">
+                <input style="width: 225px" class="form-control" ng-model="log_user_dialog_firstname" id="log_user_domain" type="text" placeholder="First Name">
+              </div>
+               <div  class="col-3">
+              	 <button style="margin-left: 125px" id="log_save_user" ng-click="logUserDialogsearch()"  class="btn btn-primary btn-block " > Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="container">
+                        
+                        <div class="wrapper" >
+                            
+                            <div class="panel-body table-responsive">
+                             
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Last Name</th>
+                                        <th>Email Address</th>
+                                        <th>Username</th>
+                                        <th>Domain</th>
+                                        <th>Location</th>
+                                        <th>Phone</th>
+                                        <th>Extension</th>
+                                        <th>Internet</th>
+                                        <th>Delete</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="LogUserDialogSearchData in LogUserDialogSearchDatas">
+                                        <td id={{LogUserDialogSearchData['intpk_user_id']}}><a ng-click="getLogDialogSelectedUser(LogUserDialogSearchData['intpk_user_id'])" href="#">{{LogUserDialogSearchData['str_firstname']}}</a></td>
+										<td>{{LogUserDialogSearchData['str_lastname']}}</td>
+										<td>{{LogUserDialogSearchData['str_email']}}</td>	
+										<td>{{LogUserDialogSearchData['str_username']}}</td>	
+										<td>{{LogUserDialogSearchData['str_domain']}}</td>	
+										<td>{{LogUserDialogSearchData['str_location']}}</td>	
+										<td>{{LogUserDialogSearchData['str_phone']}}</td>
+										<td>{{LogUserDialogSearchData['str_extension']}}</td>
+										<td>{{LogUserDialogSearchData['int_internet_access']}}</td>
+										<td><button id={{'delete_user_id_'+LogUserDialogSearchData['intpk_user_id']}} ng-click="logUserDelete(LogUserDialogSearchData['intpk_user_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button></td>
+                                    </tr>
+                               
+                                
+                                </tbody>
+                            </table>
+                            </div>
+                        </div></div>
+        
+        
+        
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+	
+
+
+ <div class="modal fade" id="LogUserMapDriveSearch" tabindex="-1" role="dialog" aria-labelledby="LogUserSearch" aria-hidden="true">
+     <div class="modal-dialog modal-lg"  >
+        <div class="modal-content">
+          <div class="modal-header">
+           <div class="form-group">
+            <div class="form-row">
+              <div class="col-6">
+            	<h5 class="modal-title" id="exampleModalLabel">Map Drive Search</h5> 
+              </div>
+              
+              <div class="col-3">
+                <input style="width: 225px" class="form-control" ng-model="log_map_drive_dialog_firstname" id="log_user_domain" type="text" placeholder="First Name">
+              </div>
+               <div  class="col-3">
+              	 <button style="margin-left: 125px" id="log_save_user" ng-click="logMapdriveDialogsearch()"  class="btn btn-primary btn-block " > Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="container">
+                        
+                        <div class="wrapper" >
+                            
+                            <div class="panel-body table-responsive">
+                             
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>Map Drive</th>
+                                        <th>Letter</th>
+                                        <th>Delete</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="LogMapDriveDialogSearchData in LogMapDriveDialogSearchDatas">
+                                        <td id={{LogMapDriveDialogSearchData['intpk_user_map_drive_id']}}><a ng-click="getLogDialogSelectedUserMapDrive(LogMapDriveDialogSearchData['intpk_user_map_drive_id'])" href="#">{{LogMapDriveDialogSearchData['str_firstname']}}</a></td>
+										
+										<td>{{LogMapDriveDialogSearchData['str_link_desc']}}</td>	
+										<td>{{LogMapDriveDialogSearchData['str_letter_desc']}}</td>	
+										<td><button id={{'delete_map_drive_user_id_'+LogMapDriveDialogSearchData['intpk_user_map_drive_id']}} ng-click="logUserMapDriveDelete(LogMapDriveDialogSearchData['intpk_user_map_drive_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button>
+             </td>
+                                    </tr>
+                               
+                                
+                                </tbody>
+                            </table>
+                            </div>
+                        </div></div>
+        
+        
+        
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+           
+          </div>
+        </div>
+      </div>
+    </div>	
+    
+    
+    
+    
+    <div class="modal fade" id="LogUserVpnSearch" tabindex="-1" role="dialog" aria-labelledby="LogUserVPNSearch" aria-hidden="true">
+     <div class="modal-dialog modal-lg"  >
+        <div class="modal-content">
+          <div class="modal-header">
+           <div class="form-group">
+            <div class="form-row">
+              <div class="col-6">
+            	<h5 class="modal-title" id="exampleModalLabel">Vpn Search</h5> 
+              </div>
+              
+              <div class="col-3">
+                <input style="width: 225px" class="form-control" ng-model="log_vpn_dialog_firstname" id="log_user_domain" type="text" placeholder="First Name">
+              </div>
+               <div  class="col-3">
+              	 <button style="margin-left: 125px" id="log_save_user" ng-click="logVpnDialogsearch()"  class="btn btn-primary btn-block " > Search</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        
+        <div class="container">
+                        
+                        <div class="wrapper" >
+                            
+                            <div class="panel-body table-responsive">
+                             
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>First Name</th>
+                                        <th>VPN ID</th>
+                                        <th>Delete</th>
+                                        
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="LogVpnDialogSearchData in LogVpnDialogSearchDatas">
+                                        <td id={{LogVpnDialogSearchData['intpk_vpn_id']}}><a ng-click="getLogDialogSelectedUserVpn(LogVpnDialogSearchData['intpk_vpn_id'])" href="#">{{LogVpnDialogSearchData['str_firstname']}}</a></td>
+										
+										<td>{{LogVpnDialogSearchData['str_vpn_id']}}</td>	
+										<td><button id={{'delete_vpn_id_'+LogVpnDialogSearchData['intpk_vpn_id']}} ng-click="logUserVpnDelete(LogVpnDialogSearchData['intpk_vpn_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button>
+             </td>
+                                    </tr>
+                               
+                                
+                                </tbody>
+                            </table>
+                            </div>
+                        </div></div>
+        
+        
+        
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+           
+          </div>
+        </div>
+      </div>
+    </div>	
+    
+	
+	</div>
+</html>	

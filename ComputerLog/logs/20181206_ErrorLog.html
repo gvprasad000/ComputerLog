@@ -1,0 +1,48 @@
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-06 09:42:14</em></strong><br />
+	<strong style="width: 75px;">Query:</strong>    select HP.*,H1.str_system_id AS MainHwSystemId,
+					   H2.str_system_id AS ConnectHwSystemId,HT1.str_hardware_desc AS MainHwType,
+					   HT2.str_hardware_desc AS ConnectHwType
+					   from [ComputerLog].[dbo].[tbl_hardware_peripheral] AS HP 
+					   INNER JOIN [ComputerLog].[dbo].[tbl_hardware] AS H1
+					   ON H1.intpk_hardware_id=HP.intfk_hardware_main_id 
+					   INNER JOIN [ComputerLog].[dbo].[tbl_hardware] AS H2
+					   ON H2.intpk_hardware_id=HP.intfk_hardware_connect_id 
+					   INNER JOIN [ComputerLog].[dbo].[tbl_hardware_type] AS HT1
+					   ON HT1.intpk_hardware_type_id=H1.intfk_hardware_type_id
+					   INNER JOIN [ComputerLog].[dbo].[tbl_hardware_type] AS HT2
+					   ON HT2.intpk_hardware_type_id=H2.intfk_hardware_type_id
+					   where intfk_hardware_main_id=<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-06 09:42:17</em></strong><br />
+	<strong style="width: 75px;">Query:</strong>    select HP.*,H1.str_system_id AS MainHwSystemId,
+					   H2.str_system_id AS ConnectHwSystemId,HT1.str_hardware_desc AS MainHwType,
+					   HT2.str_hardware_desc AS ConnectHwType
+					   from [ComputerLog].[dbo].[tbl_hardware_peripheral] AS HP 
+					   INNER JOIN [ComputerLog].[dbo].[tbl_hardware] AS H1
+					   ON H1.intpk_hardware_id=HP.intfk_hardware_main_id 
+					   INNER JOIN [ComputerLog].[dbo].[tbl_hardware] AS H2
+					   ON H2.intpk_hardware_id=HP.intfk_hardware_connect_id 
+					   INNER JOIN [ComputerLog].[dbo].[tbl_hardware_type] AS HT1
+					   ON HT1.intpk_hardware_type_id=H1.intfk_hardware_type_id
+					   INNER JOIN [ComputerLog].[dbo].[tbl_hardware_type] AS HT2
+					   ON HT2.intpk_hardware_type_id=H2.intfk_hardware_type_id
+					   where intfk_hardware_main_id=<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-12-06 12:07:34</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> exec [ComputerLog].[dbo].[save_update_computer_log_hardware]0,7,4,'trest098','testnew',1,'123',1,1<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> hardware.php-->ajxLogHardware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+

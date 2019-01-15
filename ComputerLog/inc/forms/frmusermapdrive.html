@@ -1,0 +1,99 @@
+ <html ng-app="myApp">
+ 
+ <div  style="margin-top:-820px" id="" ng-controller="UserMapDriveController" class="container">
+ <div  class="container">
+    <div class="card card-register mx-auto mt-5">
+      <div class="card-header"><b>User</b></div>
+      <div class="card-body">
+<form data-toggle="validator" role="form" ng-submit="saveDisclimar()" novalidate>
+<div class="col-md-10 col-md-offset-1">
+	<div class="panel panel-default">
+	
+	  			<ul class="nav nav-tabs">
+				    <li><a ng-click="logUserTab()" data-toggle="tab" href="">User</a></li>
+				    <li><a style="margin-left: 15px" ng-click="logUserOtherTab('vpn')" data-toggle="tab" href="#vpn">VPN</a></li>
+				    <li><a style="margin-left: 15px" ng-click="logUserOtherTab('drive')" data-toggle="tab" href="#drive">Map Drive</a></li>
+				    
+				  </ul>	 
+	
+	    <div id="disclaimer_body" class="panel-body">
+
+	 	<br>
+				 
+			<div  ng-show="userTab" class="container">
+				  
+						<div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			                <label id="log_user_id" ng-model="log_user_id" for="logUserFirstName">First name</label>
+			                <input class="form-control" ng-model="log_user_firstname" id="log_user_first_name" type="text" aria-describedby="nameHelp" placeholder="Enter first name">
+			              </div>
+			              <div class="col-md-6">
+			                <label for="logUserLastName">Last name</label>
+			                <input class="form-control" ng-model="log_user_lastname" id="log_user_last_name" type="text" aria-describedby="nameHelp" placeholder="Enter last name">
+			              </div>
+			            </div>
+			          </div>
+			          <div class="form-group">
+			           <div class="form-row">
+				           <div class="col-md-6">
+				            <label for="logUserEmailAddress">Email address</label>
+				            <input class="form-control" ng-model="log_user_email" id="log_user_email" type="email" aria-describedby="emailHelp" placeholder="Enter email">
+				          </div>
+				          <div class="col-md-6">
+				            <label for="logUserUsername">Username</label>
+			                <input class="form-control" ng-model="log_user_username" id="log_user_user_name" type="text" placeholder="UserName"> </div>
+			          </div>
+			          </div>
+			          <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			               <label for="logUserDomain">Domian</label>
+			                <input class="form-control" ng-model="log_user_domain" id="log_user_domain" type="text" placeholder="Domain">
+			               </div>
+			              <div class="col-md-6">
+			                <label for="logUserLocation">Location</label>
+			                <input class="form-control" ng-model="log_user_location" id="log_user_location" type="text" placeholder="Location">
+			              </div>
+			            </div>
+			          </div>
+			           <div class="form-group">
+			            <div class="form-row">
+			              <div class="col-md-6">
+			              	 <button id="log_save_user" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+			               </div>
+			              <div class="col-md-6">
+			               <button  data-toggle="modal" type="button" data-target="#LogUserSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+			
+			               	 <!-- <button ng-click="openDialogUserSearch()" class="btn btn-primary btn-block" ><i class="fa fa-search" aria-hidden="true"></i> Search</button> -->
+			              </div>
+			            </div>
+			          </div>
+				  
+				</div>
+				
+				
+				
+				
+				<div class="tab-content">
+				    <div  ng-show="vpnTab" id="vpn" class="tab-pane fade in active">
+				      <h3>VPN</h3>
+				      <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</p>
+				    </div>
+				    <div ng-show="mapdriveTab" id="drive" class="tab-pane fade">
+				      <h3>Drive</h3>
+				      <p>Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+				    </div>
+				 </div>
+
+	 	</div>
+	 
+	 </div>
+	</div>
+
+</form>
+	</div>
+	</div>
+	</div>
+	</div>
+</html>	

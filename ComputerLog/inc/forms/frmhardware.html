@@ -1,0 +1,1154 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+<style>
+	.multiselect {
+	  width: 200px;
+	}
+	
+	.selectBox {
+	  position: relative;
+	}
+	
+	.selectBox select {
+	  width: 100%;
+	  font-weight: bold;
+	}
+	
+	.overSelect {
+	  position: absolute;
+	  left: 0;
+	  right: 0;
+	  top: 0;
+	  bottom: 0;
+	}
+	
+	#checkboxes {
+	  display: none;
+	  border: 1px #dadada solid;
+	}
+	
+	#checkboxes label {
+	  display: block;
+	}
+	
+	#checkboxes label:hover {
+	  background-color: #1e90ff;
+	}
+	
+	
+</style>
+
+</head>
+
+	
+
+
+<div  style="margin-top:-1250px" id="" ng-controller="HardwareController" class="container">
+
+ <div id="MyHardware" class="container">
+    <div class="card card-register mx-auto mt-5">
+     <div class="card-header">
+	     <div class="form-row">
+	     	 <div class="col-md-3"><b>Hardwares</b>     		    	  			
+	      	 </div>
+	      	 <div ng-if="showSearch" style="margin-left: 320px">
+	      		<button style="width: 135px" data-toggle="modal" type="button" ng-click="modelShow()" data-target="#LogHardwareSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+	     	</div>
+	     </div>
+     </div>
+      <div class="card-body">
+			<form data-toggle="validator" role="form" ng-submit="saveLogHardware()" novalidate>
+			<div class="col-md-10 col-md-offset-1">
+				<div class="panel panel-default">
+				
+				  			<ul class="nav nav-tabs">
+							  <!--   <li><a ng-click="logHardwareTab('type')" data-toggle="tab" href="">Type</a></li>
+							    <li><a style="margin-left: 15px" ng-click="logHardwareTab('component')" data-toggle="tab" href="#component">Component</a></li> -->
+							    <li><a style="margin-left: 15px" ng-click="logHardwareTab('hardware');getHardwareType();getAllHardwareComponents();logGetAllSoftwareRecord()" data-toggle="tab" href="#hardware">HW/SW</a></li>
+							   <li><a style="margin-left: 15px" ng-click="logHardwareTab('user_hardware');getAllHardware();logHardwareAllUsers()" data-toggle="tab" href="#HardwareUser">HW User</a></li>   
+							    <li><a style="margin-left: 15px" ng-click="logHardwareTab('peripheral');getAllHardware()" data-toggle="tab" href="#peripheral">HW Peripheral</a></li>
+							    
+							</ul>	 
+				
+				    <div id="disclaimer_body" class="panel-body">
+			
+				 	<br>
+							 
+						<!--<div  ng-show="type" class="container">
+							  <h3 id="log_Hardware_type_id" name="">Type</h3>
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  ng-model="log_hardware_type_id" for="logHardwareType">Type <font color="red">*</font></label>
+						                <input style="width: 435px" class="form-control" ng-model="log_hardware_type_name" id="log_hardware_type_name" type="text" aria-describedby="nameHelp" placeholder="Enter hardware type">
+						              </div>
+						              
+						          </div>
+						          </div>			         
+						    
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_hardware" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogHardwareTypeSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+						
+						               	
+						              </div>
+						            </div>
+						          </div>
+							  
+							</div>
+							
+							<div class="tab-content">
+							    <div  ng-show="component" id="component" class="tab-pane fade in active">
+							    	  <h3 id="log_Hardware_component_id" name="">Component</h3>
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logComponentName">Component <font color="red">*</font></label>
+						                <input style="width: 435px" class="form-control" ng-model="log_hardware_component_name" id="log_component_name" type="text" aria-describedby="nameHelp" placeholder="Enter component name">
+						              </div>
+						              
+						          </div>
+						          </div>			         
+						    
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_hardware_component" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogHardwareComponentSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+						
+						               	
+						              </div>
+						            </div>
+						          </div>
+						          
+								</div>
+						
+							 </div>  -->
+							
+					
+				           
+							<div class="tab-content">
+							    <div  ng-show="hardware" id="hardware" >
+							    	   <div class="form-row">
+							    	   		<div class="col-md-4">
+								    	  		<h3 id="log_Hardware" name="">Hardware</h3>
+							              	</div>
+								    	 
+						              </div>
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label id="log_Hardware_id"  for="logHardwareTypeCopyName">Type <font color="red">*</font></label>
+						                        <select  style="width: 475px;" ng-model="log_hardware_type_copy" class="form-control">
+												 	<option value="">select..</option>	
+												 	<option ng-repeat="HardwareType in HardwareTypes"   value={{HardwareType['intpk_hardware_type_id']}}>{{HardwareType['str_hardware_desc']}} </option>									   												 
+												</select>  
+								   	  </div>
+								   	  <div class="col-md-2">
+						                 	 <button ng-click="logHardwareIp()" style="margin-left: 250px;margin-top: 35px" id="log_hardware_Ip" data-toggle="modal" type="button" data-target="#LogHardwareIp" class="btn btn-primary btn-block" > <i class="fa fa-plus-circle" aria-hidden="true"></i> IP</button>
+								   	  </div>
+						              
+						          </div>
+						          </div>			         
+						    
+						    <div class="form-group">
+						            <div class="form-row">
+						
+						              <div  class="col-lg-5">
+						                <label id="log_Hardware_components_copy"  for="log_Hardware_components">Components  <a id="log_delete_hardware_component" ng-click="deleteHardwareComponent();"  href="#"><font color="red";>( <i class="fa fa-trash-o" aria-hidden="true"> Delete )</i></font></a></label>
+						     			   <select id="log_hardware_component_copy" ng-model="log_hardware_component_copy" multiple style="width: 475px;"  class="form-control">
+												 	 <option style="padding: 5px"  id={{'comp_'+HardwareComponent['intpk_component_id']}} name="" ng-repeat="HardwareComponent in HardwareComponents"   value={{HardwareComponent['intpk_component_id']}}>{{HardwareComponent['str_component_name']+':  '+ HardwareComponent['str_serial_no']}} </option>									   												 
+										   </select>
+	 		
+									   </div>
+									   <div class="col-md-2">
+							                 <button style="margin-left: 290px;margin-top:30px" ng-click="logHardwareComponentAdd()" style="margin-top: 35px;width: 75px" id="log_hardware_components_add" data-toggle="modal" type="button" data-target="#LogHardwareComponentAdd" class="btn btn-primary btn-block" > <i class="fa fa-plus-circle" aria-hidden="true"></i> Map</button>
+									   		 <button style="margin-left: 290px;margin-top:20px" ng-click="selectAllListedComponentInpopUp()" id="log_hardware_components_add" data-toggle="modal" type="button" data-target="#LogHardwareComponentAddNew" class="btn btn-primary btn-block" > <i class="fa fa-plus-circle" aria-hidden="true"></i> Add</button>
+									   </div>
+									     
+						          </div>
+						        
+						          </div>
+						          
+					  		 <div class="form-group">
+						         <div class="form-row">
+						              <div class="col-md-5">
+						                <label id="log_map_hw_sw_software"  for="log_map_hw_sw_software">Software <a id="log_delete_map_hw_sw_software" ng-click="deleteSoftwareRecordItems();"  href="#"><font color="red";>( <i class="fa fa-trash-o" aria-hidden="true"> Delete )</i></font></a></label>
+						     			   <select id="log_map_hw_sw_software_multiselect" ng-model="log_map_hw_sw_software" multiple style="width: 475px;"   class="form-control">
+												 	 <option id={{'log_map_hw_sw_software_'+LogGetSelectedSoftwareRecord['intpk_software_record_id']}} name="" ng-repeat="LogGetSelectedSoftwareRecord in LogGetSelectedSoftwareRecords"   value={{LogGetSelectedSoftwareRecord['intpk_software_record_id']}}>{{LogGetSelectedSoftwareRecord['str_software_desc']}} </option>									   												 
+												</select>
+				
+									   </div>
+									     <div class="col-md-2">
+							                 <button ng-click="logMapHwSwSoftwareAdd()" style="margin-left: 290px;margin-top:30px" id="log_hardware_components_add" data-toggle="modal" type="button" data-target="#LogMapHwSwSoftwareAdd" class="btn btn-primary btn-block" > <i class="fa fa-plus-circle" aria-hidden="true"></i> Map</button> 
+									 	     <button ng-click="selectAllListedSoftwaresInpopUp()" style="margin-left: 290px;margin-top:20px" id="log_hardware_components_add" data-toggle="modal" type="button" data-target="#LogHardwareSoftwareAddNeW" class="btn btn-primary btn-block" > <i class="fa fa-plus-circle" aria-hidden="true"></i> Add</button>
+									   </div>
+									 
+						          </div>
+					           </div>
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label id="log_Hardware_plant_id"  for="logHardwareplant">Plant <font color="red">*</font></label>
+						                        <select  style="width: 230px;" ng-model="log_hardware_plant" class="form-control">
+												 	<option value="">select..</option>	
+												 	<option ng-repeat="plant in plants"   value={{plant['intpk_plant_id']}}>{{plant['str_plant_name']}} </option>									   												 
+												</select>  
+								   		</div>
+								   		 <div class="col-md-6">
+						                <label id="log_Hardware_system_name"  for="logforsystemanme">System Name </label>
+						                         <input style="width: 235px" class="form-control" ng-model="log_hardware_system_name" id="log_hardware_system_name" type="text" aria-describedby="nameHelp" placeholder="Enter system name"> 
+								   		</div>
+						              
+						          	</div>
+						          </div>
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+							             <div class="col-md-6">
+							                <label id="log_Hardware_service_tag"  for="logHardwareServiceTag">Service Tag <font color="red">*</font></label>
+							                <input style="width: 230px" class="form-control" ng-model="log_hardware_service_tag" id="log_hardware_service_tag" type="text" aria-describedby="nameHelp" placeholder="Enter service Tag">
+							                
+									  	 </div>
+								   
+									    <div class="col-md-6">
+							                <label id="log_Hardware_system_id"  for="logHardwareSystemId">System Id </label>
+							                <input style="width: 235px" class="form-control" ng-model="log_hardware_system_id" id="log_hardware_system_id" type="text" aria-describedby="nameHelp" placeholder="Enter System Id">
+							                
+									   </div>
+						              
+						         	 </div>
+						          </div>
+						          
+						       
+				          
+						          <div class="form-group">
+						            <div class="form-row">
+						               <div class="col-md-6">
+							                <label id="log_Hardware_system_id"  for="logHardwareSystemId">Admin </label>
+							                <input style="width: 230px" class="form-control" ng-model="log_hardware_admin_pswd" id="log_hardware_admin_pswd" type="text" aria-describedby="nameHelp" placeholder="Password">
+							                
+									   </div>
+							             
+									   
+									    <div class="col-md-6">
+							                <label id="log_Hardware_serial_no"  for="logHardwareSerialNo">Serial No </label>
+							                     <input style="width: 235px" class="form-control" ng-model="log_hardware_serial_no" id="log_hardware_serial_no" type="text" aria-describedby="nameHelp" placeholder="Enter Serial No">
+									   </div>
+						              
+						          	</div>
+						          </div>
+						          
+							   
+							      <div class="form-group">
+						            <div class="form-row">
+						               <div class="col-md-3">
+							                <label id="log_Hardware_active"  for="logHardwareActive">Active </label>
+							                     <select  style="width: 110px;" ng-model="log_hardware_active" class="form-control">
+													 	<option value="">select..</option>	
+													 	<option   value="1">Yes </option>
+													 	<option   value="0">No </option>									   												 
+													</select>  
+									   </div>
+						                <div class="col-md-3">
+							                <label id="log_Hardware_rdp"  for="logHardwareActive">RDP </label>
+							                     <select  style="width: 110px;" ng-model="log_hardware_rdp" class="form-control">
+													 	<option value="">select..</option>	
+													 	<option   value="1">Yes </option>
+													 	<option   value="0">No </option>									   												 
+													</select>  
+									   </div>
+								   
+								       <div class="col-md-4">
+						                 <label id="log_Hardware_tcmp"  for="logHardwareActive">TCMP </label>
+						                     <select  style="width: 235px;" ng-model="log_hardware_tcmp" class="form-control">
+												 	<option value="">select..</option>	
+												 	<option   value="1">Yes </option>
+												 	<option   value="0">No </option>									   												 
+												</select>  
+								   		</div>
+						              
+						        	  </div>
+						          </div>
+									
+								
+						          
+						        
+						          
+						      
+						    
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_hardware_copy" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogHardwareSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+
+						               	 <!-- <button ng-click="openDialogUserSearch()" class="btn btn-primary btn-block" ><i class="fa fa-search" aria-hidden="true"></i> Search</button> -->
+						              </div>
+						            </div>
+						          </div>
+						          
+								</div>
+						
+							 </div>
+							 
+							 <div class="tab-content">
+							    <div  ng-show="peripheral" id="peripheral" class="tab-pane fade in active">
+							    	  <h3 id="log_Hardware_peripheral_id" name="">Peripheral</h3>
+								
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logPeripheralMainHw">Hardware Main <font color="red">*</font></label>
+						                 <select ng-change="getSelectedHardwarePeripheral(log_peripheral_main_hw)"  style="width: 475px;" ng-model="log_peripheral_main_hw" class="form-control">
+												 	<option value="">select..</option>	
+												 	<option ng-repeat="AllHardware in AllHardwares"   value={{AllHardware['intpk_hardware_id']}}>{{AllHardware['str_hardware_desc']+'('+AllHardware['str_system_id']+')'+AllHardware['str_system_name']}} </option>									   												 
+												</select> 
+						              </div>
+						            </div>
+						          </div>
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	  <label id="logPeripheralConnectHw"  for="logPeripheralConnectHw">Hardware Connect  <font color="red">*</font><a id="log_delete_hardware_peripheral_connect" ng-click="deleteHardwarePeripheralConnect();"  href="#"><font color="red";>( <i class="fa fa-trash-o" aria-hidden="true"> Delete )</i></font></a></label>
+						     			   <select id="log_peripheral_connect_hw_multiselect" ng-model="log_peripheral_connect_hw" multiple style="width: 475px;"  class="form-control">
+												 	 <option id={{'PrepConnect_'+ForMainselectedHardware['intpk_hardware_id']}} name="" ng-repeat="ForMainselectedHardware in ForMainselectedHardwares"   value={{ForMainselectedHardware['intpk_hardware_id']}}>{{ForMainselectedHardware['str_hardware_desc']+'('+ForMainselectedHardware['str_system_id']+')'+ForMainselectedHardware['str_system_name']}} </option>									   												 
+												</select>
+						              </div>
+						              <div  class="col-2">
+						              	 <button style="margin-left: 245px;margin-top:30px" ng-click="openPopUpToSelectHardwareConnect()" id="log_add_hardware_user" data-toggle="modal" type="button" data-target="#LogAddHardwarePeripheral" class="btn btn-primary btn-block" > <i class="fa fa-plus-circle" aria-hidden="true"></i> Add</button>
+						              </div>
+						         	 </div>
+						          </div>
+
+						          
+						        			         
+						    
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_hardware_peripheral" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogHardwarePeripheralSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+						
+						               	 <!-- <button ng-click="openDialogUserSearch()" class="btn btn-primary btn-block" ><i class="fa fa-search" aria-hidden="true"></i> Search</button> -->
+						              </div>
+						            </div>
+						          </div>
+						          
+								</div>
+						
+							 </div>
+							 
+							  <div class="tab-content">
+							    <div  ng-show="HardwareUser" id="HardwareUser" class="tab-pane fade in active">
+							    	  <h3 id="log_hardware_user" name="">HW User</h3>
+								
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logHardwareUser">Hardware<font color="red">*</font></label>
+						                 <select ng-change="getSelectedHardwareUser(log_hardware_user_hardware)" style="width: 475px;" ng-model="log_hardware_user_hardware" class="form-control">
+												 	<option value="">select..</option>	
+												 	<option ng-repeat="AllHardware in AllHardwares"   value={{AllHardware['intpk_hardware_id']}}>{{AllHardware['str_hardware_desc']+'('+AllHardware['str_system_id']+')'+AllHardware['str_system_name']}} </option>									   												 
+												</select> 
+						              </div>
+						            </div>
+						          </div>
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logHardwareUser">User<font color="red">* <a id="log_delete_hardware_user_selected_item" ng-click="deleteHardwareUserSelectedItem();"  href="#"><font color="red";>( <i class="fa fa-trash-o" aria-hidden="true"> Delete )</i></font></a></font></label>
+						               
+						                 <select  style="width: 475px;" ng-model="log_hardware_user_user" multiple class="form-control">
+												 	<option ng-click="getUserHardwareData()" ng-repeat="HardwareSelectedUser in HardwareSelectedUsers"   value={{HardwareSelectedUser['intpk_user_id']}}>{{HardwareSelectedUser['str_lastname']}} </option>									   												 
+												</select> 
+						              </div>
+						             
+						              <div  class="col-2">
+						              	 <button style="margin-left: 245px;margin-top:30px" ng-click="mapAllUsers()" id="log_add_hardware_user" data-toggle="modal" type="button" data-target="#LogAddHardwareUser" class="btn btn-primary btn-block" > <i class="fa fa-plus-circle" aria-hidden="true"></i> Add</button>
+						              </div>
+						            </div>
+						          </div>
+						          
+						          <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label id="log_hardware_user_password"  for="logHardwareUserPassword">Password</label>
+						                    <input style="width: 475px" class="form-control" ng-model="log_hardware_user_password" id="log_user_hardware_password_txt" type="text" aria-describedby="nameHelp" placeholder="Enter Password">
+						              
+								  	  </div>
+						              
+						         	 </div>
+						          </div>
+						          
+						         
+						          
+						      	  <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label id="log_hardware_user_printer"  for="logHardwareUserPrinter">Printer Rights</label>
+						                    <input style="width: 475px" class="form-control" ng-model="log_hardware_user_printer" id="log_hardware_user_printer_txt" type="text" aria-describedby="nameHelp" placeholder="Yes/No">
+								  	  </div>
+						         	</div>
+						          </div>	         
+						    
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						              	 <button id="log_save_hardware_user" type="submit" class="btn btn-primary btn-block" ><i class="fa fa-floppy-o" aria-hidden="true"></i> Save</button>
+						               </div>
+						              <div class="col-md-6">
+						               <button  data-toggle="modal" type="button" data-target="#LogHardwareUserSearch" class="btn btn-primary btn-block"><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+						
+						               	 <!-- <button ng-click="openDialogUserSearch()" class="btn btn-primary btn-block" ><i class="fa fa-search" aria-hidden="true"></i> Search</button> -->
+						              </div>
+						            </div>
+						          </div>
+						          
+								</div>
+						
+							 </div>
+							 
+							 
+			
+				 	</div>
+				 
+				 </div>
+				</div>
+			
+			</form>
+	</div>
+	</div>
+	</div>
+	
+	
+	
+		<div class="modal fade" id="LogHardwareIp" tabindex="-1" role="dialog" aria-labelledby="LogHardwareIp" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-10">
+	            	<h5 class="modal-title" id="LogHardwareAddIp">Hardware IP-Address</h5> 
+	              </div>
+	               <div  class="col-2">
+	              	 <button style="margin-left: 245px" id="log_search_dialogue" ng-click="addIpRow()"  class="btn btn-primary btn-block " > Add</button>
+	              </div>
+	              </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table    class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Description</th>
+	                                        <th>IP Address</th>
+	                                        <th>Delete</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="HardwareIpTable"  name="1" >
+	                                     <tr id="hw_ip_row">
+
+								  			<td class="col-sm-4">
+								                <input id="hardware_ip_desc_1" name="" ng-model="hardware_ip_desc_1"  type="text" style="width: 250px" name="hardware_ip_desc_1"  class="form-control"/>
+								            </td>
+								 			 <td class="col-sm-4">
+								                <input id="hardware_ip_address_1" name="" ng-model="hardware_ip_address_1" type="text"  style="width: 190px" name="hardware_ip_address_1"  class="form-control"/>
+								            </td>
+								 			
+								            <td class="col-sm-2"><a class="deleteRow"></a>
+													<button id="remove_id_hardware_ip_1" name="remove_hardware_ip_1"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" type="button"></button>
+								            </td>
+        								</tr>
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	           <!--  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>  -->
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	
+	
+	    <div class="modal fade" id="LogHardwareComponentAdd" tabindex="-1" role="dialog" aria-labelledby="LogHardwareComponentAdd" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	              <div class="col-12">
+	            	<h5 class="modal-title" id="LogHardwareCompAddSearch">Hardware-Component Map</h5> 
+	              </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Component</th>
+	                                        <th>Description</th>
+	                                        
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="AppendTableComponent">
+	                                   
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	           <!--  <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button> -->
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	   <div class="modal fade" id="LogHardwareComponentAddNew" tabindex="-1" role="dialog" aria-labelledby="LogHardwareComponentAdd" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	              <div class="col-12">
+	            	<h5 class="modal-title" id="LogHardwareCompAddNew">Hardware-Component Add</h5> 
+	              </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logComponentName">Component <font color="red">*</font></label>
+						                <input style="width: 335px" class="form-control" ng-model="log_hardware_component_name" id="log_component_name" type="text" aria-describedby="nameHelp" placeholder="Enter component name">
+						              </div>
+						              
+						              <div class="col-lg-4">
+							                <label id="log_Hardware_components_copy"  for="log_Hardware_components">Select Components <font color="red"> (Press Ctrl)</font></label>
+							     			   <select id="log_hardware_select_component_copy_multiselect"  ng-model="log_hardware_select_component_copy" multiple style="width: 215px;"  class="form-control">
+													 	 <option id={{'comp_'+SelectAllHardwareComponent['intpk_component_id']}} name="" ng-repeat="SelectAllHardwareComponent in SelectAllHardwareComponents"   value={{SelectAllHardwareComponent['intpk_component_id']}}>{{SelectAllHardwareComponent['str_component_name']}} </option>									   												 
+											   </select>
+	 		
+									   </div>
+									   <div class="col-lg-2">
+									   		 <button style="width: 105px;margin-top: 25px;margin-left: -20px" id="log_save_hardware_component" data-dismiss="modal" type="button" ng-click="allComponentSelectItem()" class="btn btn-primary btn-block" > Select</button>
+									   </div>
+									   <div class="col-lg-6">
+									   		 <button style="width: 285px;margin-top: -50px;" id="log_save_hardware_component" type="button" ng-click="saveComponent();getAllHardwareComponents();" class="btn btn-primary btn-block" ><i class="fa fa-plus-circle" aria-hidden="true"></i> Add New Component</button>
+									   </div>
+						         	 </div>
+						          </div>			         
+	                        </div></div>
+	        
+	          <div class="modal-footer">
+	           
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	   <div class="modal fade" id="LogHardwareSoftwareAddNeW" tabindex="-1" role="dialog" aria-labelledby="LogHardwareComponentAdd" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	              <div class="col-12">
+	            	<h5 class="modal-title" id="LogHardwareCompAddNew">Software Add</h5> 
+	              </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+								<div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  ng-model="intpk_software_id" for="logSoftwareName">Software Name <font color="red">*</font></label>
+						                <input style="width: 335px" class="form-control" ng-model="log_software_name" id="log_software_name" type="text" aria-describedby="nameHelp" placeholder="Enter Software Name">
+						              </div>
+						              
+						                 <div class="col-lg-4">
+							                <label id="log_select_software_copy"  for="log_select_software_copy">Select Software <font color="red"> (Press Ctrl)</font></label>
+							     			   <select id="log_select_software_copy_multiselect"  ng-model="log_select_software_copy" multiple style="width: 215px;height: 260px"  class="form-control">
+													 	 <option id={{'soft_'+LogGetAllSoftwareRecord['intpk_software_record_id']}} name="" ng-repeat="LogGetAllSoftwareRecord in LogGetAllSoftwareRecords"   value={{LogGetAllSoftwareRecord['intpk_software_record_id']}}>{{LogGetAllSoftwareRecord['str_software_desc']}} </option>									   												 
+											   </select>
+	 		
+									   </div>
+									   <div class="col-lg-2">
+									   		 <button style="width: 105px;margin-top: 25px;margin-left: -20px" id="log_select_softwares" data-dismiss="modal" type="button" ng-click="allSoftwareSelectItem()" class="btn btn-primary btn-block" > Select</button>
+									   </div>  
+						          </div>
+						          </div>	
+						          
+						          
+						          
+						          <div style="margin-top: -230px" class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label id="log_software_record_id" ng-model="intpk_software_record_id"  for="logSoftwareDesc">Software Desc </label>
+						                <input style="width: 335px" class="form-control" ng-model="log_software_desc" id="log_software_desc" type="text" aria-describedby="nameHelp" placeholder="Enter Software desc">
+						              </div>
+						            
+						          </div>
+						          </div>	
+						          
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-md-6">
+						                <label  for="logSoftwarelicence">Software licence </label>
+						                <input style="width: 335px" class="form-control" ng-model="log_software_licence" id="log_software_licence" type="text" aria-describedby="nameHelp" placeholder="Enter Software licence">
+						              </div>
+						              
+						          </div>
+						          </div>
+						          
+						           <div class="form-group">
+						            <div class="form-row">
+						              <div class="col-lg-6">
+						             		 <button style="width: 200px" id="log_save_hardware_component" type="button" ng-click="saveSoftware()" class="btn btn-primary btn-block" ><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Software</button>
+									   		
+									   </div>
+						              
+						          </div>
+						          </div>
+						          
+						           	         
+						     				         
+	                        </div></div>
+	        
+	          <div class="modal-footer">
+	           
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	   <div class="modal fade" id="LogAddHardwareUser" tabindex="-1" role="dialog" aria-labelledby="LogHardwareComponentAdd" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	              <div class="col-12">
+	            	<h5 class="modal-title" id="LogHardwareCompAddNew">Hardware-User Add</h5> 
+	              </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="form-group">
+						            <div class="form-row">
+						              
+						              
+						              <div class="col-lg-4">
+							                <label id="log_Hardware_components_copy"  for="log_Hardware_components">Select Users<font color="red"> (Press Ctrl)</font> </label>
+							     			   <select id="log_all_user_multiselect"  ng-model="log_all_user" multiple style="width: 215px;"  class="form-control">
+													 	 <option id={{'comp_'+HardwareAllUser['intpk_user_id']}} name="" ng-repeat="HardwareAllUser in HardwareAllUsers"   value={{HardwareAllUser['intpk_user_id']}}>{{HardwareAllUser['str_lastname']}} </option>									   												 
+											   </select>
+	 		
+									   </div>
+									   <div class="col-lg-2">
+									   		 <button style="width: 105px;margin-top: 25px;margin-left: -20px" id="log_save_hardware_component" data-dismiss="modal" type="button" ng-click="allUsersSelectItem()" class="btn btn-primary btn-block" > Select</button>
+									   </div>
+									  
+						         	 </div>
+						          </div>			         
+	                        </div></div>
+	        
+	          <div class="modal-footer">
+	           
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	    <div class="modal fade" id="LogAddHardwarePeripheral" tabindex="-1" role="dialog" aria-labelledby="LogHardwareComponentAdd" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	              <div class="col-12">
+	            	<h5 class="modal-title" id="LogHardwareCompAddNew">Hardware-Peripheral Add</h5> 
+	              </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="form-group">
+						            <div class="form-row">
+						              
+						              
+						              <div class="col-lg-6">
+							                <label id="log_Hardware_connect_add_all_item"  for="log_Hardware_connect_add_all_item">Select Connect Hardware<font color="red"> (Press Ctrl)</font> </label>
+							     			   <select id="log_Hardware_connect_add_all_item_multiselect"  ng-model="log_Hardware_connect_add_all_item" multiple style="width: 380px;height: 120px;margin-top: -10px"  class="form-control">
+													 	<option ng-repeat="AllHardware in AllHardwares"   value={{AllHardware['intpk_hardware_id']}}>{{AllHardware['str_hardware_desc']+'('+AllHardware['str_system_id']+')'+AllHardware['str_system_name']}} </option>										   												 
+											   </select>
+	 		
+									   </div>
+									   <div class="col-lg-2">
+									   		 <button style="width: 105px;margin-top: 25px;" id="log_save_hardware_component" data-dismiss="modal" type="button" ng-click="allConnectHWSelectItem()" class="btn btn-primary btn-block" > Select</button>
+									   </div>
+									  
+						         	 </div>
+						          </div>			         
+	                        </div></div>
+	        
+	          <div class="modal-footer">
+	           
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+
+	    <div  class="modal fade" ng-show="one" id="LogHardwareSearch" tabindex="-1" role="dialog" aria-labelledby="LogHardwareComponentAdd" aria-hidden="true">
+	     <div class="modal-dialog modal-lg">
+	        <div class="modal-content" style="width:1200px;margin-left: -170px;overflow-y: scroll; height:90%;">
+	         <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-1">
+	            	<h5 class="modal-title" id="">H/W</h5> 
+	              </div>
+	              <div class="col-2">
+	                 <select  style="width: 200px;" ng-model="log_hardware_type_search" class="form-control">
+						 	<option value="">select H/W Type..</option>	
+						 	<option ng-repeat="HardwareType in HardwareTypes"   value={{HardwareType['intpk_hardware_type_id']}}>{{HardwareType['str_hardware_desc']}} </option>									   												 
+					</select>  
+	              </div>
+	               <div style="margin-left: 20px" class="col-2">
+	                  <select id="logHardwareCompsearch" ng-model="log_hardware_component_search"  style="width: 200px;"  class="form-control">
+						 	<option value="">select H/W Comp..</option>	
+						 	 <option id={{'comp_'+HardwareComponent['intpk_component_id']}} name="" ng-repeat="HardwareComponent in HardwareComponents"   value={{HardwareComponent['intpk_component_id']}}>{{HardwareComponent['str_component_name']}} </option>									   												 
+					  </select>  
+	              </div>
+	              <div  style="margin-left: 20px" class="col-2">
+	                <input style="width: 225px" class="form-control" ng-model="log_hardware_search_dialogue" id="log_hardware_search_dialogue" type="text" placeholder="Enter system Id">
+	              </div>
+	              <div style="margin-left: 43px" class="col-md-2">            
+						 <input style="width: 200px" class="form-control" ng-model="log_hardware_systemname_search" id="log_hardware_systemname_search" type="text" aria-describedby="nameHelp" placeholder="Sytem name..">
+					</div>
+	               <div style="margin-left: 13px"  class="col-1">
+	              	 <button style="margin-left: 10px" id="log_search_dialogue" ng-click="logHardwareDialogsearch()"  class="btn btn-primary btn-block " ><i class="fa fa-search" aria-hidden="true"></i> Search</button>
+	              </div>
+	              
+	            </div>
+	            
+	          
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Type</th>
+	                                        <th>Component</th>
+	                                        <th>System Name</th>
+	                                        <th>System Id</th>
+	                                      
+	                                        <th>Description</th>
+	                                        <th>Plant</th>
+	                                        <th>Service Tag</th>
+	                                        <th>Admin Pass</th>
+	                                        <th>Active</th>
+	                                        <th>Serial No</th>
+	                                        <th>RDP</th>
+	                                        <th>TCMP</th>
+	                                         <th>Delete</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="AppendTableComponent">
+	                               		 <tr ng-repeat="Hardware in Hardwares">
+	                                        <td data-dismiss="modal" id={{Hardware['intpk_hardware_component_id']}}><a ng-click="getLogDialogSelectedHardware(Hardware['str_system_id'])" href="#">{{Hardware['str_hardware_desc']}}</a></td>
+	                                         <td>{{Hardware['str_component_name']}}</td>
+	                                         <td>{{Hardware['str_system_name']}}</td>
+	                                         <td>{{Hardware['str_system_id']}}</td>
+	                                        
+	                                         <td>{{Hardware['str_serial_no']}}</td>
+	                                         <td>{{Hardware['str_plant_name']}}</td>
+	        	                             <td>{{Hardware['str_service_tag']}}</td>
+	        	                             <td>{{Hardware['str_admin_pswd']}}</td>
+	                                         <td>{{Hardware['bln_active']}}</td>
+	                                         <td>{{Hardware['str_hw_serial_no']}}</td>
+	                                         <td>{{Hardware['bln_rdp']}}</td>
+	                                         <td>{{Hardware['bln_tcmp']}}</td>
+											<td><button id={{'delete_harware_Comp_id_'+Hardware['intpk_hardware_component_id']}} ng-click="logHardwareDeleteComp(Hardware['intpk_hardware_component_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button></td>
+	                                    </tr>
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" ng-click="closeModel()" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div> 
+		
+		
+	    <div class="modal fade" id="LogHardwareTypeSearch" tabindex="-1" role="dialog" aria-labelledby="LogHardwareTypeSearch" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div  class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-6">
+	            	<h5 class="modal-title" id="LogHardwareTypeSearch">Hardware-Type Search</h5> 
+	              </div>
+	              
+	              <div class="col-3">
+	                <input style="width: 225px" class="form-control" ng-model="log_hardware_type_search" id="log_user_domain" type="text" placeholder="Hardware type">
+	              </div>
+	               <div  class="col-3">
+	              	 <button style="margin-left: 125px" id="log_save_user" ng-click="logHardwareTypeDialogsearch()"  class="btn btn-primary btn-block " > Search</button>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Hardware Description</th>
+	                                        <th>Delete</th>
+	                                        
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr ng-repeat="HardwareType in HardwareTypes">
+	                                        <td id={{HardwareType['intpk_hardware_type_id']}}><a ng-click="getLogDialogSelectedHardwareType(HardwareType['intpk_hardware_type_id'])" href="#">{{HardwareType['str_hardware_desc']}}</a></td>
+											<td><button id={{'delete_harware_type_id_'+HardwareType['intpk_hardware_type_id']}} ng-click="logHardwareTypeDelete(HardwareType['intpk_hardware_type_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button></td>
+	                                    </tr>
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	   
+	    
+	    
+	    <div class="modal fade" id="LogHardwareComponentSearch" tabindex="-1" role="dialog" aria-labelledby="#LogHardwareComponentSearch" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-6">
+	            	<h5 class="modal-title" id="LogHardwareComponentSearch">Hardware-Component Search</h5> 
+	              </div>
+	              
+	              <div class="col-3">
+	                <input style="width: 225px" class="form-control" ng-model="log_hardware_component_search" id="log_hardware_type_search" type="text" placeholder="Component name">
+	              </div>
+	               <div  class="col-3">
+	              	 <button style="margin-left: 85px" id="log_hardware_component_search" ng-click="logHardwareComponentDialogsearch()"  class="btn btn-primary btn-block " > Search</button>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Hardware Description</th>
+	                                        <th>Delete</th>
+	                                        
+	                                    </tr>
+	                                </thead>
+	                                <tbody>
+	                                    <tr ng-repeat="HardwareComponent in HardwareComponents">
+	                                        <td id={{HardwareComponent['intpk_component_id']}}><a ng-click="getLogDialogSelectedHardwareComponent(HardwareComponent['intpk_component_id'])" href="#">{{HardwareComponent['str_component_name']}}</a></td>
+											<td><button id={{'delete_harware_type_id_'+HardwareComponent['intpk_component_id']}} ng-click="logHardwareComponentDelete(HardwareComponent['intpk_component_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button></td>
+	                                    </tr>
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	    
+	      <div class="modal fade" id="LogHardwarePeripheralSearch" tabindex="-1" role="dialog" aria-labelledby="#LogHardwarePeripheralSearch" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-6">
+	            	<h5 class="modal-title" id="#LogHardwarePeripheralSearchLabel">Peripheral Search</h5> 
+	              </div>
+	              
+	              <div class="col-3">
+	                 <select id="log_peripheral_connect_hw" ng-model="log_peripheral_search_hw" ng-change="logHardwarePeripheralDialogsearch()"  style="width: 200px;"  class="form-control">
+					 	   <option id={{'PrepConnect_'+AllHardware['intpk_hardware_id']}} name="" ng-repeat="AllHardware in AllHardwares"   value={{AllHardware['intpk_hardware_id']}}>{{AllHardware['str_hardware_desc']+'('+AllHardware['str_system_id']+')'}} </option>									   												 
+					 </select>    </div>
+	               <div  class="col-3">
+	              	 <button style="margin-left: 85px" id="log_hardware_peripheral_search_button" ng-click="logHardwarePeripheralDialogsearch(log_peripheral_search_hw)"  class="btn btn-primary btn-block " > Search</button>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Main Hardware</th>
+	                                        <th>Connect Hardware</th>
+	                                        <th>Delete</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="PeripheralHardwareList">
+	                                    <tr  ng-repeat="PeripheralHardware in PeripheralHardwares">
+	                                        <td id={{PeripheralHardware['intpk_hardware_peripheral_id']}}><a ng-click="getLogDialogSelectedHardwarePeripheral(PeripheralHardware['intfk_hardware_main_id'])" href="#">{{PeripheralHardware['MainHwType']+'('+PeripheralHardware['MainHwSystemId']+')'}}</a></td>
+											<td>{{PeripheralHardware['ConnectHwType']+'('+PeripheralHardware['ConnectHwSystemId']+')'}}</td>
+											<td><button id={{'delete_harware_peripheral_'+PeripheralHardware['intpk_hardware_peripheral_id']}} ng-click="logHardwarePeripheralDelete(PeripheralHardware['intpk_hardware_peripheral_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button></td>
+	                                    </tr>
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	                        
+	        
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	    
+	   <div class="modal fade" id="LogHardwareUserSearch" tabindex="-1" role="dialog" aria-labelledby="LogHardwareUserSearch" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	            <div class="form-row">
+	              <div class="col-3">
+	            	<h5 class="modal-title" id="LogHardwareUser">HW User Search</h5> 
+	              </div>
+	              
+	              <div class="col-3">
+	                    <input style="width: 155px" class="form-control" ng-model="log_hardware_user_firstname_search" id="log_hardware_type_search" type="text" placeholder="First name">
+	               </div>
+	               <div class="col-3">
+	                    <input style="width: 155px" class="form-control" ng-model="log_hardware_system_name_search" id="log_hardware_system_name_search" type="text" placeholder="System Name">
+	               </div>
+	               <div  class="col-3">
+	              	 <button style="margin-left: 75px" id="log_hardware_user_search_button" ng-click="logHardwareUserDialogsearch(log_hardware_user_firstname_search)"  class="btn btn-primary btn-block " > Search</button>
+	              </div>
+	            </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table  class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Hardware</th>
+	                                        <th>User</th>
+	                                        <th>Password</th>
+	                                        <th>Printer Rights</th>
+	                                        <th>Delete</th>
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="hardware_user_find">
+	                                    <tr ng-repeat="SelectedHardwareUser in SelectedHardwareUsers">
+	                                        <td id={{SelectedHardwareUser['intpk_user_hardware_id']}}><a ng-click="getLogDialogSelectedHardwareUser(SelectedHardwareUser['intfk_hardware_id'])" href="#">{{SelectedHardwareUser['str_hardware_desc']+'('+SelectedHardwareUser['str_system_id']+')'+' '+SelectedHardwareUser['str_system_name']}}</a></td>
+											<td>{{SelectedHardwareUser['str_lastname']}}</td>
+											<td>{{SelectedHardwareUser['str_password']}}</td>
+											<td>{{SelectedHardwareUser['str_local_printer_rights']}}</td>
+											<td><button id={{'delete_harware_peripheral_'+SelectedHardwareUser['intpk_user_hardware_id']}} ng-click="logHardwareUserDelete(SelectedHardwareUser['intpk_user_hardware_id'])"  class="ibtnDel fa fa-trash-o btn btn-md btn-danger" ></button></td>
+	                                    </tr>
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	                        
+	
+	          <div class="modal-footer">
+	            <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	    
+	      <div class="modal fade" id="LogMapHwSwSoftwareAdd" tabindex="-1" role="dialog" aria-labelledby="LogMapHwSwSoftwareAdd" aria-hidden="true">
+	     <div class="modal-dialog modal-lg"  >
+	        <div class="modal-content">
+	          <div class="modal-header">
+	           <div class="form-group">
+	              <div class="col-12">
+	            	<h5 class="modal-title" id="LogHardwareCompAddSearch">Software Add Licence</h5> 
+	              </div>
+	          </div>
+	        </div>
+	        
+	        
+	        <div class="container">
+	                        
+	                        <div class="wrapper" >
+	                            
+	                            <div class="panel-body table-responsive">
+	                             
+	                            <table class="table table-bordered">
+	                                <thead>
+	                                    <tr>
+	                                        <th>Software</th>
+	                                        <th>Licence</th>
+	                                        
+	                                    </tr>
+	                                </thead>
+	                                <tbody id="AppendSwTableComponent">
+	                                   
+	                               
+	                                
+	                                </tbody>
+	                            </table>
+	                            </div>
+	                        </div></div>
+	        
+	        
+	        
+	          <div class="modal-footer">
+	            <!-- <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button> -->
+	           
+	          </div>
+	        </div>
+	      </div>
+	    </div>
+	    
+	
+	</div>
+
+
+
+
+</html>

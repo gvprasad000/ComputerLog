@@ -1,0 +1,11 @@
+<div style="border-bottom: 1px solid #000; margin-bottom: 10px;">
+	<strong><em style="font-size: 1.2em;">2018-11-09 09:12:17</em></strong><br />
+	<strong style="width: 75px;">Query:</strong> select * from [ComputerLog].[dbo].[tbl_hardware_software] As HWSW 
+				  INNER JOIN [ComputerLog].[dbo].[tbl_hardware] AS H ON H.intpk_hardware_id=HWSW.intfk_hardware_id 
+				  INNER JOIN [ComputerLog].[dbo].[tbl_software_record] AS SR ON SR.intpk_software_record_id=HWSW.intfk_software_record_id
+				  where H.intfk_hardware_id =6<br />
+	<strong style="width: 75px;">Error:</strong> An invalid parameter was passed to sqlsrv_has_rows.<br />
+	<strong style="width: 75px;">Page:</strong> software.php-->ajxLogSoftware.php<br />
+	<strong style="width: 75px;">User:</strong>  <br />
+	</div><br />
+

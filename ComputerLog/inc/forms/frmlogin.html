@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>SB Admin - Start Bootstrap Template</title>
+  <!-- Bootstrap core CSS-->
+
+</head>
+
+<body class="bg-dark">
+  <div  class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Login</div>
+      <div class="card-body">
+        <form ng-submit="validateLogin()" ng-controller="LoginValidate">
+          <div class="form-group">
+            <label for="ComputerLogUsername">Username</label>
+            <input class="form-control" ng-model="user_name"  id="log_login_username" type="text" aria-describedby="emailHelp" placeholder="Enter username">
+          </div>
+          <div class="form-group">
+            <label for="ComputerLogPassword">Password</label>
+            <input class="form-control" ng-model="password"  id="log_login_password" type="password" placeholder="Password">
+          </div>
+          <div class="form-group">
+            <div class="form-check">
+              <label class="form-check-label">
+                <input class="form-check-input" type="checkbox"> Remember Password</label>
+            </div>
+          </div>
+            <button class="btn btn-lg btn-primary btn-block" type="submit">
+	               <i class="fa fa-unlock" aria-hidden="true"></i> Sign in</button>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="register.html">Register an Account</a>
+          <a class="d-block small" href="forgot-password.html">Forgot Password?</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+ 
+</body>
+
+</html>
